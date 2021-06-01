@@ -48,6 +48,7 @@
 			<form method="POST"  id="parametrage" action="">
 
 				<fieldset form="parametrage">
+				
 				<legend>Veuillez remplir le formulaire</legend>
 
 
@@ -59,7 +60,7 @@
 
 				<!-- Filtrage -->
 				<div class="filtres">
-					<p class="co">Filtrer</p>
+					<label class="label">Filtrer</label>
 					<input type="button" value="Filtrer" class="bouton" onclick="show('div');"/>
 					<div  style="display:none" id="div">
 
@@ -121,24 +122,27 @@
 
 				<div class="boite">
 					<label class="label">Solveur</label><br>
-					<label class="info"for="solveur">Minizinc</label>
-					<input type="radio" name="solveur" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
-						<div class="boite" id="div6" style="display:none">
+					<div class="boite">
+						<label class="info"for="solveur">Minizinc</label>
+						<input type="radio" name="solveur" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
+						<div class="boite2" id="div6" style="display:none">
 							<div>
 								<label class="label" for="format">DZN</label><br>
-						    	<input type="radio" name="format" class="radio" value="DZN">
-						    </div>
+					    		<input type="radio" name="format" class="radio" value="DZN">
+							</div>
 						    <div>
 						    	<label class="label" for="format">JSON</label><br>
 								<input type="radio" name="format" class="radio" value="JSON">
 							</div>
 						</div>
-					<label class="info"for="solveur">Constraint Handling Rules</label>
-					<input type="radio" name="solveur" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
-						<div class="boite display-none" id="div7">
+						<label class="info"for="solveur">Constraint Handling Rules</label>
+						<input type="radio" name="solveur" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
+						<div class="boite2 display-none" id="div7" style="display:none">
 							<label class="label" for="format">JSON</label><br>
-							<input type="radio" name="format" class="radio" value="JSON" checked>
+							<input type="radio" name="format" class="radio" value="JSON">
 						</div>
+					</div>
+						
 				</div>
 
 				<!-- Choix du type -->
