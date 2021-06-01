@@ -135,7 +135,7 @@
 						</div>
 					<label class="info"for="solveur">Constraint Handling Rules</label>
 					<input type="radio" name="solveur" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
-						<div class="boite" id="div7" style="display:none">
+						<div class="boite display-none" id="div7">
 							<label class="label" for="format">JSON</label><br>
 							<input type="radio" name="format" class="radio" value="JSON" checked>
 						</div>
