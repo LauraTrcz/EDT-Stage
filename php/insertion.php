@@ -337,8 +337,18 @@
 				<label class="label" for="semestre">Semestre</label><br>
 		    	<select class="bouton" name="semestre" id="semestre" type="submit" required>
 					<option disabled selected value> -- Sélectionner -- </option>
-					<option value="Semestre 1">Semestre 1</option>
-					<option value="Semestre 2">Semestre 2</option>
+					<optgroup label="Semestre">
+						<option value="Semestre 1">Semestre 1</option>
+						<option value="Semestre 2">Semestre 2</option>
+					</optgroup>
+					<optgroup label="Période">
+						<option value="P1">Période 1</option>
+						<option value="P2">Période 2</option>
+						<option value="P3">Période 3</option>
+						<option value="P4">Période 4</option>
+						<option value="P5">Période 5</option>
+					</optgroup>
+					
 				</select>
 			</div>
 			

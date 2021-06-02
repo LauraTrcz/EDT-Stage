@@ -282,37 +282,41 @@
 
 		<!-- Tableaux -->
 
-		<div>
+		<div class="tableau">
 			<table class="table">
-            <tr>
-                <th>Fichier xml</th>
-                <th>Auteur</th>
-                <th>Composantes</th>
-                <th>Filière</th>
-                <th>Formation</th>
-                <th>Année universitaire</th>
-                <th>Semestre</th>
-            </tr>
-	        <?php 
-	        foreach ($data as $key => $value) //Affichage tableau ligne par ligne
-	        {
-	        ?>
-	            <tr>
-	                <td><?php echo $value['fichier'];?></td>
-	                <td><?php echo $value['auteur'];?></td>
-	                <td><?php echo $value['composantes'];?></td>
-	                <td><?php echo $value['filiere'];?></td>
-	                <td><?php echo $value['formation'];?></td>
-	                <td><?php echo $value['annee'];?></td>
-	                <td><?php echo $value['semestre'];?></td>
-	            </tr>
-	        <?php
-	        }
-	        if(!$value){	//Si aucune valeur trouvée
-	        	echo "Aucun résultat ne correspond à vos critères";
-	        }
-	        ?>
-	    	</table>
+				<thead class="table_head"> 
+					<tr>
+		                <th>Fichier xml</th>
+		                <th>Auteur</th>
+		                <th>Composantes</th>
+		                <th>Filière</th>
+		                <th>Formation</th>
+		                <th>Année universitaire</th>
+		                <th>Semestre</th>
+		            </tr>
+				</thead>
+			        <?php 
+			        foreach ($data as $key => $value) //Affichage tableau ligne par ligne
+			        {
+			        ?>
+			    <tbody class="table_body">
+			        		<tr>
+				                <td><?php echo $value['fichier'];?></td>
+				                <td><?php echo $value['auteur'];?></td>
+				                <td><?php echo $value['composantes'];?></td>
+				                <td><?php echo $value['filiere'];?></td>
+				                <td><?php echo $value['formation'];?></td>
+				                <td><?php echo $value['annee'];?></td>
+				                <td><?php echo $value['semestre'];?></td>
+			            	</tr>
+			    </tbody>
+		        <?php
+		        }
+		        if(!$value){	//Si aucune valeur trouvée
+		        	echo "Aucun résultat ne correspond à vos critères";
+		        }
+		        ?>
+		    </table>
 		</div>
 
 		

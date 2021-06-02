@@ -1,3 +1,12 @@
+body{
+  background-image: url("../images/wallpaper2.jpg");
+  background-size: 130%;
+  background-repeat: no-repeat;
+  background-position: -400px 0px;
+}
+
+/*Barre de menu*/
+
 header{
 	position: fixed; /* La barre de navigation est fixe */
 	top: 0; /* Position en haut */
@@ -8,29 +17,8 @@ header{
 	background: rgb(72,61,139); /*couleur sympa*/
 }
 
-body{
-	background-image: url("../images/wallpaper2.jpg");
-  background-size: 130%;
-  background-repeat: no-repeat;
-  background-position: -400px 0px;
-}
-
 header img{
   width: 50px;
-}
-
-.page {
-	background-size: cover;
-	background-repeat: no-repeat;
-	text-align: center;
-	padding: 25px;
-}
-
-section.haut{
-  background-size: cover;
-  background-repeat: no-repeat;
-  text-align: center;
-  padding: 25px;
 }
 
 .menu ul{
@@ -66,15 +54,22 @@ section.haut{
 
 }
 
-.button:hover {
-  cursor: pointer;
-  font-size: 20px;
+/*Page*/
+
+/*Sections et div*/
+
+section.haut{
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 25px;
 }
 
-.page h1{
-	font-size: 75px;
-	margin-top: 55px;
-	text-shadow: 2px 2px #FFEFD5;
+.page {
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: center;
+	padding: 25px;
 }
 
 .formulaires{
@@ -88,12 +83,12 @@ section.haut{
 }
 
 .formulaires div{
-	margin: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
- 	flex-wrap: wrap;
- 	height: auto;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: auto;
 }
 
 #parametrage{
@@ -122,6 +117,15 @@ section.haut{
   justify-content: center;
   justify-content: space-between;
   align-items: center;
+}
+
+
+/*Boutons*/
+
+
+.button:hover {
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .bouton{
@@ -161,8 +165,6 @@ section.haut{
   transition: all 100ms linear;
 }
 
-/*Test bouton radio*/
-
 .radio:checked {
   background-image: linear-gradient(180deg, #95d891, #74bbad);
   color: #fff;
@@ -178,8 +180,12 @@ section.haut{
 }
 
 
-.co {
-	font-size: 30px;
+/*Titres et textes*/
+
+.page h1{
+	font-size: 75px;
+	margin-top: 55px;
+	text-shadow: 2px 2px #FFEFD5;
 }
 
 .label{

@@ -54,8 +54,8 @@
 
 				<!-- Choix d'instance -->
 				<div class="instances">
-		            <label class="label" for="fichier">Jeu de données</label><br>
-		    		<input	class="bouton" id="fichier" name="fichier" type="file" accept="text/xml" required>
+		            <label class="label" for="instance">Instance</label><br>
+		    		<input	class="bouton" id="instance" name="instance" type="file" accept="text/xml" required>
 				</div>
 
 				<!-- Filtrage -->
@@ -115,13 +115,11 @@
 
 				<hr noshade width="90%" size="3" align="center">
 
-				<h2> Paramétrage solveur </h2>
-
 				<!-- Formulaire paramétrage solveur -->
-				<!-- Choix du solveur -->
+				<!-- Choix du solveur et du format-->
 
 				<div class="boite">
-					<label class="label">Solveur</label><br>
+					<label class="label">Solveur |</label><br>
 					<div class="boite">
 						<label class="info"for="solveur">Minizinc</label>
 						<input type="radio" name="solveur" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
@@ -145,18 +143,18 @@
 						
 				</div>
 
-				<!-- Choix du type -->
+				<!-- Choix de la representation -->
 
 				<div class="boite">
-					<label class="label">Type</label>
+					<label class="label">Type |</label>
 					<div class="boite2">
 						<div>
-							<label class="info" for="type">Intension</label><br>
-					    	<input type="radio" name="type" class="radio" value="INT">
+							<label class="info" for="representation">Intension</label><br>
+					    	<input type="radio" name="representation" class="radio" value="INT">
 					    </div>
 					    <div>
-					    	<label class="info" for="type">Extension</label><br>
-					    	<input type="radio" name="type" class="radio" value="EXT" checked>
+					    	<label class="info" for="representation">Extension</label><br>
+					    	<input type="radio" name="representation" class="radio" value="EXT" checked>
 						</div>
 					</div>	
 				</div>
@@ -164,24 +162,39 @@
 				<!-- Choix du modèle -->
 				
 				<div class="boite">
-					<label class="label" for="modele">Modèle</label><br>
+					<label class="label" for="modele">Modèle |</label><br>
 			    	<select class="bouton" name="modele" id="modele" type="submit" required>
 						<option disabled selected value> -- Sélectionner -- </option>
 						<option value="SQC">Sequenced</option>
-						<option value="EXT">Weekly</option>
+						<option value="WEE">Weekly</option>
 					</select>
 				</div>
+				<!--
+				<div class="boite">
+					<label class="label">Modèle</label>
+					<div class="boite2">
+						<div>
+							<label class="info" for="modele">Sequenced</label><br>
+					    	<input type="radio" name="modele" class="radio" value="SQC">
+					    </div>
+					    <div>
+					    	<label class="info" for="modele">Weekly</label><br>
+					    	<input type="radio" name="modele" class="radio" value="WEE" checked>
+						</div>
+					</div>	
+				</div>
+				-->
 
 				<!-- Choix des heuristiques -->
 				
 				<div class="boite">
-					<label class="label">Heuristiques</label>
+					<label class="label">Heuristiques |</label>
 					<div class="boite2">
-						<div>
+						<div class="bouton2">
 							<label class="info" for="heuristiques">De variable</label><br>
 					    	<input type="radio" name="heuristiques" class="radio" value="VAR" checked>
 					    </div>
-					    <div>
+					    <div class="bouton2">
 					    	<label class="info" for="heuristiques">De valeur</label><br>
 					    	<input type="radio" name="heuristiques" class="radio" value="VAL" checked>
 						</div>
@@ -191,15 +204,15 @@
 				<!-- Temps de calcul -->
 
 				<div class="boite">
-					<label class="label">Temps de calcul</label>
+					<label class="label">Temps de calcul |</label>
 					<div class="boite2">
 						<div>
-							<label class="info" for="temps">en secondes</label><br>
-					    	<input class="bouton" type="number" name="temps" id="temps" min="1" max="600" step="1">
+							<label class="info" for="temps_calcul">en secondes</label><br>
+					    	<input class="bouton" type="time" name="temps_calcul" min="00:01" max="24:00" required>
 					    </div>
 					    <div>
-					    	<label class="info" for="temps">en minutes</label><br>
-					    	<input class="bouton" type="number" name="temps" id="temps" min="1" max="20" step="60">
+					    	<label class="info" for="temps_calcul">en minutes</label><br>
+					    	<input class="bouton" type="number" name="temps_calcul" id="temps_minutes" min="1" max="20" step="60">
 						</div>
 					</div>	
 				</div>
