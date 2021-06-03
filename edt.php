@@ -41,8 +41,7 @@
 		
 		<h1>Emploi Du Temps</h1>
 		
-		<!-- Fromulaire de jeu de données et de solveur -->
-		<h2>Formulaire</h2>
+		<!-- Formulaire de jeu de données et de solveur -->
 		<div class="formulaires">
 
 			<form method="POST"  id="parametrage" action="">
@@ -50,7 +49,6 @@
 				<fieldset form="parametrage">
 				
 				<legend>Veuillez remplir le formulaire</legend>
-
 
 				<!-- Choix d'instance -->
 				<div class="instances">
