@@ -1,0 +1,99 @@
+<!ELEMENT timetabling (calendar?,rooms?,equipments?,teachers?,groups?,courses?,constraints?)> <!-- TODO solution -->
+
+<!ATTLIST timetabling xmlns:xsi CDATA #IMPLIED>
+<!ATTLIST timetabling xsi:noNamespaceSchemaLocation NMTOKENS #IMPLIED>
+<!ATTLIST timetabling name NMTOKENS #REQUIRED>
+<!ATTLIST timetabling nrWeeks NMTOKEN #REQUIRED>
+<!ATTLIST timetabling nrDaysPerWeek NMTOKEN #REQUIRED>
+<!ATTLIST timetabling nrSlotsPerDay NMTOKEN #REQUIRED>
+
+<!ELEMENT calendar (startingYear?,weeks?,weekDays?,daySlotTimes?)>
+    <!ELEMENT startingYear (#PCDATA)>
+     <!ELEMENT weeks (week)+>
+        <!ELEMENT week (#PCDATA)>
+    <!ELEMENT weekDays (weekDay)+>
+        <!ELEMENT weekDay (#PCDATA)>
+    <!ELEMENT daySlotTimes (daySlotTime)+>
+        <!ATTLIST daySlotTimes duration NMTOKEN #REQUIRED>
+        <!ELEMENT daySlotTime (#PCDATA)>
+    
+
+<!ELEMENT rooms (room+)>
+    <!ELEMENT room EMPTY>
+        <!--<!ATTLIST room id CDATA #IMPLIED>
+        <!ATTLIST room capacity NMTOKEN #IMPLIED>-->
+        <!ATTLIST room id NMTOKEN #IMPLIED 
+                 capacity NMTOKEN #IMPLIED>
+
+        <!ATTLIST room label CDATA #IMPLIED>
+<!--
+    <!ELEMENT roomChains (roomChain)+>
+        <!ELEMENT roomChain (room)+>
+            <!ATTLIST roomChain id CDATA #REQUIRED>
+-->
+        <!--<!ELEMENT room EMPTY>-->
+        <!--<!ATTLIST room refId NMTOKEN #IMPLIED>-->
+
+<!ELEMENT equipments EMPTY> <!-- TODO -->
+<!--
+<equipments>
+	<equipment id="" count="">
+</equipments>
+ -->
+
+<!ELEMENT groups (group)+>
+    <!ELEMENT group EMPTY>
+        <!ATTLIST group id CDATA #IMPLIED>
+        <!ATTLIST group size NMTOKEN #IMPLIED>
+        <!ATTLIST group label CDATA #IMPLIED>
+
+<!ELEMENT teachers (teacher)+>
+    <!ELEMENT teacher EMPTY>
+        <!ATTLIST teacher id CDATA #IMPLIED>
+        <!ATTLIST teacher label CDATA #IMPLIED>
+
+<!ELEMENT courses (course)+>
+    <!ELEMENT course (part)+>
+        <!ATTLIST course id CDATA #REQUIRED>
+        <!ATTLIST course label CDATA #IMPLIED>
+        <!ELEMENT part (classes?,allowedRooms?,allowedTeachers?)>
+            <!ATTLIST part id CDATA #REQUIRED>
+            <!ATTLIST part nrSessions NMTOKEN #REQUIRED> <!-- CONTRAINTE IMPLICITE : sequenced -->
+            <!ATTLIST part sessionLength NMTOKEN #REQUIRED>
+            <!ATTLIST part label CDATA #IMPLIED>
+
+            <!ELEMENT classes (class)+>
+                <!ELEMENT class (group)+>
+                    <!ATTLIST class id CDATA #REQUIRED>
+                    <!--<!ELEMENT group>-->
+                        <!ATTLIST group refId NMTOKENS #IMPLIED>
+            <!ELEMENT allowedRooms (room)+>
+                <!ATTLIST allowedRooms sessionRooms (multiple|single|none) #REQUIRED>
+                <!--<!ELEMENT room>-->
+                    <!ATTLIST room mandatory (true|false) #IMPLIED>
+                    <!ATTLIST room refId NMTOKEN #IMPLIED>
+            <!ELEMENT allowedTeachers (teacher)*>
+                <!ATTLIST allowedTeachers sessionTeachers NMTOKEN #REQUIRED>
+                <!--<!ELEMENT teacher>-->
+                    <!ATTLIST teacher nrSessions NMTOKENS #IMPLIED>
+                    <!ATTLIST teacher refId NMTOKENS #IMPLIED>
+
+<!ELEMENT constraints (constraintCollection)+>
+    <!ELEMENT constraintCollection (sessions+,constraint+)>
+        <!ELEMENT sessions (filter)*>
+            <!ATTLIST sessions groupBy (room|teacher|group|courses|course|part|class|session) #REQUIRED>   <!-- DOCUMENTATION: groupBy va créer une portée pour chaque valeur du type sélectionné. La portée contiendra l'ensemble des séances où la ressource peut intervenir. La contrainte sera conditionnée sur l'assignation de la ressource à la séance.
+            => Exemple :
+            groupBy="room" : une portée par salle, la portée de la salle H001 est constituée de toutes les sessions qui peuvent être associées à la H001, la contrainte ne sera appliquée réellement qu'aux sessions placées dans la H001.  -->
+            <!ATTLIST sessions sessionsMask CDATA #IMPLIED>
+            <!ELEMENT filter EMPTY>
+                <!ATTLIST filter type (room|teacher|group|course|part|class) #REQUIRED>
+                <!ATTLIST filter attributeName (label|id) #REQUIRED>
+                <!ATTLIST filter in CDATA #IMPLIED>
+                <!ATTLIST filter notIn CDATA #IMPLIED>
+        <!ELEMENT constraint (parameters)?>
+            <!ATTLIST constraint name NMTOKEN #REQUIRED>
+            <!ATTLIST constraint type (soft|hard) #REQUIRED>
+            <!ELEMENT parameters (parameter)+>
+                <!ELEMENT parameter (#PCDATA)>
+                    <!ATTLIST parameter type (slots|slot|weeks|week|weekSlots|weekSlot|weekDays|weekDay|daySlots|daySlot|dailySlot|dailySlots|roomLabels|teacher|equipment) #IMPLIED>
+                    <!ATTLIST parameter name NMTOKEN #REQUIRED>

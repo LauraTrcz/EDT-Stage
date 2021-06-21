@@ -28,7 +28,7 @@ function showFilieres(div3){
 	}
 }
 
-function showSemestre(div4){
+function showPeriode(div4){
 	if (document.getElementById("div4").style.display === "none") {
 		document.getElementById("div4").style.display = "block";
 	}

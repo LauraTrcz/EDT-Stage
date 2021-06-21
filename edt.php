@@ -3,6 +3,26 @@
 	include 'php/database.php';
 	global $db;
 
+	//focus sur le dossier contenant les fichiers xml
+	$dir = glob('xml/*.xml');
+
+	//insertion des données dans la base de données "solutions" et récupération des clés sous forme de tableau pour exécution de la fonction parser
+	if(isset($_POST['formsend'])){
+
+		extract($_POST); /*extraire toutes les variables*/
+
+		if(!empty($instance) && !empty($solver) && !empty($format) && !empty($representation) && !empty($temps_calcul)) { /*tant que le formulaire n'est pas vide*/
+
+			$i = $db->prepare("INSERT INTO solutions(fichier_probleme,solver,format,representation,temps_calcul) VALUES (:instance, :solver, :format, :representation, :temps_calcul)");
+			$i->execute(['instance' => $instance, 'solver' => $solver, 'format' => $format, 'representation' => $representation, 'temps_calcul' => $temps_calcul]);
+			echo "Données entrées";
+
+			array{
+
+			}
+		}	
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +35,7 @@
 		<link rel="stylesheet" href="css/formulaire.css">
 		<script src="js/Animations.js"></script> 
 		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"> 
 </head>
 <body>
 
@@ -44,25 +65,31 @@
 		<!-- Formulaire de jeu de données et de solveur -->
 		<div class="formulaires">
 
-			<form method="POST"  id="parametrage" action="">
+			<form method="POST"  id="parametrage" action="" enctype="multipart/form-data">
 
 				<fieldset form="parametrage">
-				
-				<legend>Veuillez remplir le formulaire</legend>
 
 				<!-- Choix d'instance -->
 				<div class="instances">
 		            <label class="label" for="instance">Instance</label><br>
-		    		<input	class="bouton" id="instance" name="instance" type="file" accept="text/xml" required>
+		    		<select class="bouton" name="instance" , type="submit">
+						<option disabled selected value> -- Sélectionner -- </option>
+						<?php foreach ($dir as $key => $instance) { //retourne une liste
+							?>
+							<option value="1"><?php print_r(basename($instance)); ?></option> <!-- Nom du fichier sans le chemin "xml/"" -->
+						<?php
+						}
+						?>
+					</select>
 				</div>
 
-				<!-- Filtrage -->
+				<!-- Filtrage
 				<div class="filtres">
 					<label class="label">Filtrer</label>
 					<input type="button" value="Filtrer" class="bouton" onclick="show('div');"/>
 					<div  style="display:none" id="div">
 
-						<!-- Filtrer par composante --> 
+						Filtrer par composante
 						<input type="button" value="Composante" class="bouton" onclick="showComposantes('div2');"/>
 						<div style="display:none" id="div2">
 							<form method="post" class="instance">
@@ -75,7 +102,7 @@
 				        	</form>
 						</div>
 
-						<!-- Filtrer par filière --> 
+						Filtrer par filière
 						<input type="button" value="Filière" class="bouton"onclick="showFilieres('div3');"/>
 						<div style="display:none" id="div3">
 
@@ -92,7 +119,7 @@
 				        	</form>
 						</div>
 						
-						<!-- Filtrer par année --> 
+						Filtrer par année
 						<input type="button" value="Année" class="bouton"onclick="showAnnees('div4');"/>
 						<div style="display:none" id="div4">
 							<p class="co">Veuillez choisir l'année d'études:</p>
@@ -110,6 +137,7 @@
 
 					<input type="button" value="Supprimer les filtres" class="bouton" onclick="suppr();"/>
 				</div>
+				-->
 
 				<hr noshade width="90%" size="3" align="center">
 
@@ -118,9 +146,9 @@
 
 				<div class="boite">
 					<label class="label">Solveur |</label><br>
-					<div class="boite">
-						<label class="info"for="solveur">Minizinc</label>
-						<input type="radio" name="solveur" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
+					<div class="boite2">
+						<label class="info"for="solver">Minizinc</label>
+						<input type="radio" name="solver" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
 						<div class="boite2" id="div6" style="display:none">
 							<div>
 								<label class="label" for="format">DZN</label><br>
@@ -131,8 +159,8 @@
 								<input type="radio" name="format" class="radio" value="JSON">
 							</div>
 						</div>
-						<label class="info"for="solveur">Constraint Handling Rules</label>
-						<input type="radio" name="solveur" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
+						<label class="info"for="solver">Constraint Handling Rules</label>
+						<input type="radio" name="solver" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
 						<div class="boite2 display-none" id="div7" style="display:none">
 							<label class="label" for="format">JSON</label><br>
 							<input type="radio" name="format" class="radio" value="JSON">
@@ -157,7 +185,7 @@
 					</div>	
 				</div>
 
-				<!-- Choix du modèle -->
+				<!-- Choix du modèle
 				
 				<div class="boite">
 					<label class="label" for="modele">Modèle |</label><br>
@@ -167,23 +195,8 @@
 						<option value="WEE">Weekly</option>
 					</select>
 				</div>
-				<!--
-				<div class="boite">
-					<label class="label">Modèle</label>
-					<div class="boite2">
-						<div>
-							<label class="info" for="modele">Sequenced</label><br>
-					    	<input type="radio" name="modele" class="radio" value="SQC">
-					    </div>
-					    <div>
-					    	<label class="info" for="modele">Weekly</label><br>
-					    	<input type="radio" name="modele" class="radio" value="WEE" checked>
-						</div>
-					</div>	
-				</div>
-				-->
 
-				<!-- Choix des heuristiques -->
+				Choix des heuristiques 
 				
 				<div class="boite">
 					<label class="label">Heuristiques |</label>
@@ -197,7 +210,7 @@
 					    	<input type="radio" name="heuristiques" class="radio" value="VAL" checked>
 						</div>
 					</div>	
-				</div>
+				</div> -->
 
 				<!-- Temps de calcul -->
 
@@ -205,13 +218,9 @@
 					<label class="label">Temps de calcul |</label>
 					<div class="boite2">
 						<div>
-							<label class="info" for="temps_calcul">en secondes</label><br>
+							<label class="info" for="temps_calcul">hh:mm</label><br>
 					    	<input class="bouton" type="time" name="temps_calcul" min="00:01" max="24:00" required>
 					    </div>
-					    <div>
-					    	<label class="info" for="temps_calcul">en minutes</label><br>
-					    	<input class="bouton" type="number" name="temps_calcul" id="temps_minutes" min="1" max="20" step="60">
-						</div>
 					</div>	
 				</div>
 
