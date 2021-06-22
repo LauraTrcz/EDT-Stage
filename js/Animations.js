@@ -83,3 +83,39 @@ function effacerCHR(div7)
 {   
     document.getElementById("div7").style.display = "none";   
 }
+
+function showSolver(div8){
+	if (document.getElementById("div8").style.display === "none") {
+		document.getElementById("div8").style.display = "block";
+	}
+	else {
+		document.getElementById("div8").style.display = "none";
+	}
+}
+
+function showFormat(div9){
+	if (document.getElementById("div9").style.display === "none") {
+		document.getElementById("div9").style.display = "block";
+	}
+	else {
+		document.getElementById("div9").style.display = "none";
+	}
+}
+
+function showRepresentation(div10){
+	if (document.getElementById("div10").style.display === "none") {
+		document.getElementById("div10").style.display = "block";
+	}
+	else {
+		document.getElementById("div10").style.display = "none";
+	}
+}
+
+function showTCF(div11){
+	if (document.getElementById("div11").style.display === "none") {
+		document.getElementById("div11").style.display = "block";
+	}
+	else {
+		document.getElementById("div11").style.display = "none";
+	}
+}
