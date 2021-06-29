@@ -1,28 +1,70 @@
 <?php 
 	
 	include 'php/database.php';
+	include 'Edt_parser_solver_070621/parser_edt.php';
 	global $db;
 
 	//focus sur le dossier contenant les fichiers xml
-	$dir = glob('xml/*.xml');
+	$dossier = glob('instance_xml/*.xml');
 
 	//insertion des données dans la base de données "solutions" et récupération des clés sous forme de tableau pour exécution de la fonction parser
-	if(isset($_POST['formsend'])){
+	if(isset($_POST['formulaire_edt'])){
 
 		extract($_POST); /*extraire toutes les variables*/
 
+		//enregistrement des données du formulaire dans la bdd "solutions"
+
 		if(!empty($instance) && !empty($solver) && !empty($format) && !empty($representation) && !empty($temps_calcul)) { /*tant que le formulaire n'est pas vide*/
 
-			$i = $db->prepare("INSERT INTO solutions(fichier_probleme,solver,format,representation,temps_calcul) VALUES (:instance, :solver, :format, :representation, :temps_calcul)");
-			$i->execute(['instance' => $instance, 'solver' => $solver, 'format' => $format, 'representation' => $representation, 'temps_calcul' => $temps_calcul]);
-			echo "Données entrées";
+			$i = $db->prepare("INSERT INTO solutions(fichier_probleme,solver,format,representation,temps_calcul,initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	//["place dans la bdd","clé"] => ["clé","valeur"]
+			$i -> bindParam(1,$instance);
+			$i -> bindParam(2,$solver);
+			$i -> bindParam(3,$format);
+			$i -> bindParam(4,$representation);
+			$i -> bindParam(5,$temps_calcul);
+			//$i->execute(['instance' => $instance, 'solver' => $solver, 'format' => $format, 'representation' => $representation, 'temps_calcul' => $temps_calcul]);
 
-			array{
+			echo "Données entrées\n";
 
+			//on redéclare la variable instance en ajoutant le path une fois que le fichier a été mis dans la base de données pour ne pas avoir de souci avec le parser
+
+			$instance= "instance_xml\\".$instance; //anti-slash = système, slash = PHP
+			
+			$parametres = [
+			    "instance"=> $instance,
+			    "solver"=> $solver,
+			    "format"=> $format,
+			    "representation"=> $representation,
+			    "temps_calcul"=> $temps_calcul
+			];
+
+			//shell_exec("del statistique_instance_xml\\*.txt"); //delete tous les fichiers .txt dans le dossier
+
+			$solution = runParser($parametres);
+			//print_r($solution);
+
+			//commande lire fichier csv
+			//$cs = explode("\",$solution[1])[];
+			$csv = $solution[0];  //solution est un tableau contenant [fichier_solution_xml, fichier_stats_csv] d'où indice 1
+			foreach(file($csv) as $line_csv){	//lit le fichier csv et crée un tableau, ; sépare deux cellules d'une ligne
+				$valid_data = str_getcsv($line_csv,";");
+				if(!in_array($hh[0],["solutions"])){	//cherche dans la 1e colonne du tableau hh un tableau de ce que tu veux pas, ici "solutions" seulement
+					$data[] = $valid_data;
+				}
 			}
+
+			//$handle = fopen($csv, "r");
+			//$data_csv = fgetcsv($handle, 1024, ";");
+
+			//enregistrement des stats du fichier csv dans la bdd
+			//$i = $db->prepare("INSERT INTO solutions(initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (:initTime, :solveTime, :variables, :propagators, :propagations,:nodes,:failures,:restarts,:peakDepth)");
+			for($j = 6;$j<15;$j++){
+				$i -> bindParam($j,$data[$j-6][1]);
+			}
+			$i->execute(/*['initTime' => $data[0][1], 'solveTime' => $data[1][1], 'variables' => $data[3][1], 'propagators' => $data[4][1], 'propagations' => $data[5][1], 'nodes' => $data[6][1], 'failures' => $data[7][1], 'restarts' => $data[8][1], 'peakDepth' => $data[9][1]]*/);
+			echo "Données entrées";
 		}	
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -74,70 +116,14 @@
 		            <label class="label" for="instance">Instance</label><br>
 		    		<select class="bouton" name="instance" , type="submit">
 						<option disabled selected value> -- Sélectionner -- </option>
-						<?php foreach ($dir as $key => $instance) { //retourne une liste
+						<?php foreach ($dossier as $key => $instance) { //retourne une liste
 							?>
-							<option value="1"><?php print_r(basename($instance)); ?></option> <!-- Nom du fichier sans le chemin "xml/"" -->
+							<option value="<?php print_r(basename($instance)); ?>"><?php print_r(basename($instance)); ?></option> <!-- Nom du fichier sans le chemin "xml/" -->
 						<?php
 						}
 						?>
 					</select>
 				</div>
-
-				<!-- Filtrage
-				<div class="filtres">
-					<label class="label">Filtrer</label>
-					<input type="button" value="Filtrer" class="bouton" onclick="show('div');"/>
-					<div  style="display:none" id="div">
-
-						Filtrer par composante
-						<input type="button" value="Composante" class="bouton" onclick="showComposantes('div2');"/>
-						<div style="display:none" id="div2">
-							<form method="post" class="instance">
-							<select class="bouton" name="choix" , type="submit">
-								<option disabled selected value> -- Sélectionner -- </option>
-								<option value="1">Informatique</option>
-								<option value="2">Mathématiques</option>
-								<option value="3">Biologie</option>
-							</select>
-				        	</form>
-						</div>
-
-						Filtrer par filière
-						<input type="button" value="Filière" class="bouton"onclick="showFilieres('div3');"/>
-						<div style="display:none" id="div3">
-
-							<form method="post" class="instance">
-							<select class="bouton" name="choix" , type="submit">
-								<option disabled selected value> -- Sélectionner -- </option>
-								<option value="L1L2">Portail L1/L2</option>
-								<option value="LP">Licence Pro</option>
-								<option value="L">Licence</option>
-								<option value="M">Master</option>
-								<option value="CMI">Master Ingénierie</option>
-							</select>
-				            <input class="bouton" type="submit" name="select" id="select" value="Go">
-				        	</form>
-						</div>
-						
-						Filtrer par année
-						<input type="button" value="Année" class="bouton"onclick="showAnnees('div4');"/>
-						<div style="display:none" id="div4">
-							<p class="co">Veuillez choisir l'année d'études:</p>
-							<form method="post" class="instance">
-							<select class="bouton" name="choix" , type="submit">
-								<option disabled selected value> -- Sélectionner -- </option>
-								<option value="1">1e année</option>
-								<option value="2">2e année</option>
-								<option value="3">3e année</option>
-							</select>
-				            <input class="bouton" type="submit" name="select" id="select" value="Go">
-				        	</form>
-						</div>
-					</div>
-
-					<input type="button" value="Supprimer les filtres" class="bouton" onclick="suppr();"/>
-				</div>
-				-->
 
 				<hr noshade width="90%" size="3" align="center">
 
@@ -148,22 +134,22 @@
 					<label class="label">Solveur |</label><br>
 					<div class="boite2">
 						<label class="info"for="solver">Minizinc</label>
-						<input type="radio" name="solver" class="radio" value="MZN" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
+						<input type="radio" name="solver" class="radio" value="minizinc" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
 						<div class="boite2" id="div6" style="display:none">
 							<div>
 								<label class="label" for="format">DZN</label><br>
-					    		<input type="radio" name="format" class="radio" value="DZN">
+					    		<input type="radio" name="format" class="radio" value="dzn">
 							</div>
 						    <div>
 						    	<label class="label" for="format">JSON</label><br>
-								<input type="radio" name="format" class="radio" value="JSON">
+								<input type="radio" name="format" class="radio" value="json">
 							</div>
 						</div>
 						<label class="info"for="solver">Constraint Handling Rules</label>
 						<input type="radio" name="solver" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
 						<div class="boite2 display-none" id="div7" style="display:none">
 							<label class="label" for="format">JSON</label><br>
-							<input type="radio" name="format" class="radio" value="JSON">
+							<input type="radio" name="format" class="radio" value="json">
 						</div>
 					</div>
 						
@@ -176,11 +162,11 @@
 					<div class="boite2">
 						<div>
 							<label class="info" for="representation">Intension</label><br>
-					    	<input type="radio" name="representation" class="radio" value="INT">
+					    	<input type="radio" name="representation" class="radio" value="intent">
 					    </div>
 					    <div>
 					    	<label class="info" for="representation">Extension</label><br>
-					    	<input type="radio" name="representation" class="radio" value="EXT" checked>
+					    	<input type="radio" name="representation" class="radio" value="extent" checked>
 						</div>
 					</div>	
 				</div>
@@ -218,8 +204,8 @@
 					<label class="label">Temps de calcul |</label>
 					<div class="boite2">
 						<div>
-							<label class="info" for="temps_calcul">hh:mm</label><br>
-					    	<input class="bouton" type="time" name="temps_calcul" min="00:01" max="24:00" required>
+							<label class="info" for="temps_calcul">hh : mm : ss</label><br>
+					    	<input class="bouton" type="time" name="temps_calcul" step="1" min="00:00:01" max="23:59:59" required>
 					    </div>
 					</div>	
 				</div>
@@ -227,10 +213,13 @@
 				<!-- Bouton GO -->
 			
 				<div class="valider">
-					<input class="bouton" type="submit" name="select" id="select" value="Go">
+					<input class="bouton" type="submit" name="formulaire_edt" id="select" value="Go">
 				</div>
 				</fieldset>
 			</form>
 		</div>
+	</section>
+	<section class="resultats">
+		
 	</section>
 </body>
