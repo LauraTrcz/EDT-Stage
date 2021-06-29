@@ -1,0 +1,80 @@
+% HORIZON TEMPOREL
+nr_weeks=12;
+nr_days_per_week=0;
+nr_slots_per_day=0;
+
+% DECOMPTE DES ELEMENTS PRINCIPAUX
+nr_equipments=0;
+nr_rooms=5;
+nr_teachers=2;
+nr_groups=4;
+nr_courses=1;
+nr_parts=1;
+nr_classes=1;
+nr_constraints=8;
+nr_labels=10;
+
+% DECOMPTE DES SOUS-ELEMENTS
+nr_part_equipments=0;
+nr_part_rooms=3;
+nr_part_teachers=2;
+nr_scopes=8;
+nr_filters=4;
+nr_parameters=19;
+nr_part_room_mandatory=1;
+nr_part_sessions_teacher=1;
+
+% DIMENSIONS
+max_session_rank=1;
+max_equipment_count=0;
+max_room_capacity=286;
+max_group_size=22;
+max_part_equipment_count=0;
+max_part_room_class_bound=0;
+max_part_teacher_class_bound=0;
+max_element_parameter=4;
+
+% RELATIONS ENTRE CLASSES D'ELEMENTS (STRUCTURELLES/ASSOCIATIVES)
+course_parts=[{1}];
+part_classes=[{1}];
+part_equipments=[{}];
+part_rooms=[{3,4,5}];
+part_teachers=[{1,2}];
+class_groups=[{1,2,3,4}];
+constraint_scopes=[{1},{2},{3},{4},{5},{6},{7},{8}];
+scope_filters=[{1},{2},{},{},{3},{},{},{4}];
+constraint_function=[forbidden_slots,allocate_slot,at_most_weekly,at_most_daily,at_most_daily,at_most_daily,double_rooms,not_consecutive_rooms,not_consecutive_rooms,connected_rooms];
+function_parameters=[{1,2},{3},{4},{5},{6,7,8},{9,10,11},{},{12,13,14},{15,16,17},{18,19}];
+room_label=[{1},{1},{2},{2},{2}];
+teacher_label=[{3},{3}];
+group_label=[{4,5,6},{4,5,7},{4,8,9},{4,8,9}];
+course_label=[{4}];
+part_label=[{10}];
+
+% ATTRIBUTS DES CLASSES D'ELEMENTS
+equipment_name=[];
+equipment_count=[];
+room_name=["AMPHI-A","AMPHI-B","H001","H002","H003"];
+room_capacity=[90,286,20,42,38];
+teacher_name=["LESAINT David","JAMIN Antoine"];
+group_name=["1-td1-tp1-pq","2-td1-tp3-ps","3-td2-tp2-is","4-td2-tp2-qs"];
+group_size=[18,22,10,17];
+course_name=["CT"];
+part_name=["Développement-Web-CT"];
+class_name=["Développement-Web-CT1"];
+label_name=["BATIMENT-A","BATIMENT-H","DEPARTEMENT-INFORMATIQUE","L3-INFORMATIQUE","TD1","TP1","TP3","TD2","TP2","CT"];
+part_nr_sessions=[1];
+part_length=[2];
+part_equipment_count=[];
+part_room_use=[multiple];
+part_room_mandatory=array2d(1..nr_part_room_mandatory,1..2,[1,4]);
+parameter_name=["first","last","slot","count","count","count","first","last","count","first","last","minSlot","maxSlot","rooms","minSlot","maxSlot","rooms","roomChain","roomChain"];
+parameter_type=["dailySlot","dailySlot","slot","dailySlots","dailySlots","dailySlots","dailySlot","dailySlot","dailySlots","dailySlot","dailySlot","daySlot","daySlot","roomLabels","daySlot","daySlot","roomLabels","roomIds","roomIds"];
+parameter_value=array2d(1..nr_parameters,1..max_element_parameter,[433,0,0,0,456,0,0,0,1,0,0,0,15,0,0,0,6,0,0,0,1,0,0,0,3,0,0,0,4,0,0,0,1,0,0,0,3,0,0,0,4,0,0,0,1,0,0,0,8,0,0,0,1,,0,0,1,0,0,0,8,0,0,0,1,,0,0,H001,H002,H003,0,G101,G102,G103,G104]);
+part_sessions_teacher=[2];
+part_teacher_sessions_count=[1,1];
+scope_clustering=[utt_session,utt_session,utt_group,utt_teacher,utt_session,utt_teacher,utt_group,utt_session];
+scope_mask=array2d(1..nr_scopes,1..max_session_rank,[0,0,0,0,0,0,0,0]);
+filter_type=[utt_group,utt_course,utt_part,utt_part];
+filter_elements=[{1,2,3,4},{},{1},{1}];
+function_type=[utt_hard,utt_hard,utt_hard,utt_hard,utt_hard,utt_hard,utt_soft,utt_hard,utt_hard,utt_hard];

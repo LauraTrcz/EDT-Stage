@@ -86,30 +86,39 @@ function ElementStringToXML($nameLineElement,$lineElement,$xmlSolution,$solution
 
 //=====================
 
-function writeSolutionXml($instance,$outputSolution,$outputStat = "",$outputStatCsv=""){
-
+function  writeSolutionXml($instance,$noPathName,$dateTime,$outputSolution,$outputStat = "",$outputStatCsv=""):array {
+    $j = dirname( dirname(dirname(__FILE__)));
+    $j2 = dirname(dirname(__FILE__));
+    //$j ="";
+    //echo "hh1:   $j"; 
     $elementNameNotTab = ["class","part","course","session"];
-    $fileName = substr($outputSolution,0,-4);
+    $fileName = substr($noPathName,0,-4);
+
+    $fileNameSol ="";
+    $outputStatCsv ="";
 
         if(substr(php_uname(), 0, 7) != "Windows"){
-    $fileNameSol = "solution/solution_".$fileName.".xml";}
+    $fileNameSol = $j."/solution_instance_xml/solution_".$fileName."_".$dateTime.".xml";}
       else{
- $fileNameSol = "solution\solution_".$fileName.".xml";
+ $fileNameSol = $j."\\solution_instance_xml\\solution_".$fileName."_".$dateTime.".xml";
       }
 
         if(substr(php_uname(), 0, 7) != "Windows"){
-      $outputStatCsv = "stat/".$outputStatCsv;}
+      $outputStatCsv = $j."/statistique_instance_xml/statistique_".$fileName."_".$dateTime.".csv";}
       else{
-   $outputStatCsv = "stat\\".$outputStatCsv;
+   $outputStatCsv = $j."\\statistique_instance_xml\\statistique_".$fileName."_".$dateTime.".csv";
       }
 
-    if($outputStat == ""){
+    /*if($outputStat == ""){
         $outputStat = "statistique_".$fileName.".txt";
         file_put_contents($outputStat,"");
-    }
-    if($outputStatCsv == ""){
+    }*/
+   /* if($outputStatCsv == ""){
         substr($outputStat,0,-3)."csv";
-    }
+    }*/
+//echo "hh2:  ". $fileNameSol." \n"; 
+//echo "hh3:  ". $outputStatCsv." \n"; 
+
 
     /*$insert = "<?xml version=\"1.0\"?>\n<timetabling>\n   <solutions>\n   </solutions>\n</timetabling>\n";*/
     /*$insert = '<?xml version="1.0"?>';*/
@@ -141,7 +150,7 @@ function writeSolutionXml($instance,$outputSolution,$outputStat = "",$outputStat
 
 
     $solutionsElementSolution = $xmlSolution->createElement('solutions');
-
+    //echo "SALUUUUUUUT : $outputSolution";
     $fileResult = file($outputSolution);
     //print_r($fileResult);
     foreach($fileResult as $line){
@@ -185,15 +194,15 @@ function writeSolutionXml($instance,$outputSolution,$outputStat = "",$outputStat
     $xmlSolution->appendChild($timetablingElementSolution);
     $xmlSolution->save($fileNameSol);
       if(substr(php_uname(), 0, 7) == "Windows"){
-    shell_exec("del solution_*.txt");
-    shell_exec("del statistique_*.txt");
+    shell_exec("del ".$j2."\\solution_*.txt");
+    shell_exec("del ".$j2."\\statistique_*.txt");
       }
       else{
-    shell_exec("rm solution_*.txt");
-    shell_exec("rm statistique_*.txt");
+    shell_exec("rm ".$j2."/solution_*.txt");
+    shell_exec("rm ".$j2."/statistique_*.txt");
 }
 
-
+return [$outputStatCsv, $fileNameSol];
 }//FinFunction
 
 //=====================

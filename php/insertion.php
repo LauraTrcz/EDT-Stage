@@ -3,19 +3,20 @@
 	include ('database.php');
 	global $db;
 
-	if(isset($_POST['formulaire_edt'])){ 
+	if(isset($_POST['formulaire_insertion'])){ 
 
 		extract($_POST);
 
 		if(!empty($fichier) && !empty($auteur) && !empty($composantes) && !empty($formation) && !empty($filiere) && !empty($annee) && !empty($periode)) {
 		
-			$q = $db->prepare("INSERT INTO probleme(/*fichier, */auteur, composantes, formation, filiere, annee, periode) VALUES (/*:fichier, */:auteur, :composantes, :formation, :filiere, :annee, :periode)");
-			$q->execute([/*'fichier' => $fichier, */'auteur' => $auteur, 'composantes' => $composantes, 'formation' => $formation, 'filiere' => $filiere, 'annee' => $annee, 'periode' => $periode]);
+			$q = $db->prepare("INSERT INTO probleme(fichier, auteur, composantes, formation, filiere, annee, periode) VALUES (:fichier, :auteur, :composantes, :formation, :filiere, :annee, :periode)");
+			$q->execute(['fichier' => $fichier, 'auteur' => $auteur, 'composantes' => $composantes, 'formation' => $formation, 'filiere' => $filiere, 'annee' => $annee, 'periode' => $periode]);
 			//echo "Ajout réussi!";
 		}
 
 	}
 
+	/*
 	if (isset($_FILES['fichier'])) {
 
         // Enregistrement et renommage du fichier
@@ -28,9 +29,10 @@
             echo "<hr /> Erreur de transfert n°", $_FILES["fichier"]["error"];
         }
     }	
+    */
 
 	//focus sur le dossier contenant les fichiers xml
-	$dir = glob('../xml/*.xml');
+	$dir = glob('../instance_xml/*.xml');
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +83,7 @@
 
 				<!-- Fichier XML à téléverser -->
 				<div class="boite">
-					<label class="label" for="fichier">Fichier xml à téléverser</label><br><br>
+					<label class="label" for="fichier">Fichier problème xml</label><br><br>
 					<div class="boite2">
 						<div>
 							<label class="label2" for="fichier">Ajouter depuis votre appareil</label><br>
@@ -91,12 +93,12 @@
 							<img src="../images/barre_verticale2.jpg">
 						</div>
 						<div>
-							<label class="label2" for="fichier">Chercher dans le dossier <i>"xml"</i></label><br>
-				    		<select class="bouton" name="fichier" , type="submit">
+							<label class="label2" for="fichier">Chercher dans le dossier <i>"instance_xml"</i></label><br>
+				    		<select class="bouton" name="fichier" id="fichier" type="submit">
 								<option disabled selected value> -- Sélectionner -- </option>
 								<?php foreach ($dir as $key => $fichier) { //retourne une liste
 									?>
-									<option value="1"><?php print_r(basename($fichier)); ?></option> <!-- Nom du fichier sans le chemin "xml/"" -->
+									<option value="<?php print_r(basename($fichier)); ?>"><?php print_r(basename($fichier)); ?></option> <!-- Nom du fichier sans le chemin "xml/"" -->
 								<?php
 								}
 								?>
@@ -104,7 +106,6 @@
 						</div>      
 			    	</div>
 				</div>
-
 				
 
 				<!-- Nom de l'auteur -->
@@ -114,7 +115,7 @@
 					<select class="bouton" name="auteur" id="auteur" type="submit" required>
 						<option disabled selected value> -- Sélectionner -- </option>
 						<option value="M. LESAINT">M. LESAINT</option>
-						<option value="M. JASMIN">M. JAMIN</option>
+						<option value="M. JAMIN">M. JAMIN</option>
 						<option value="M. RICHER">M. RICHER</option>
 					</select>
 				</div>
@@ -382,12 +383,20 @@
 							<option value="Semestre 2">Semestre 2</option>
 						</optgroup>
 						<optgroup label="Période">
+							<option disabled style="font-weight: bold; color: white; background-color: black;" label="Périodes du semestre 1">
 							<option value="P1">Période 1</option>
 							<option value="P2">Période 2</option>
 							<option value="P3">Période 3</option>
 							<option value="P4">Période 4</option>
 							<option value="P5">Période 5</option>
 							<option value="P6">Période 6</option>
+							<option disabled style="font-weight: bold; color: white; background-color: black;" label="Périodes du semestre 2">
+							<option value="P7">Période 7</option>
+							<option value="P8">Période 8</option>
+							<option value="P9">Période 9</option>
+							<option value="P10">Période 10</option>
+							<option value="P11">Période 11</option>
+							<option value="P12">Période 12</option>
 						</optgroup>
 					</select>
 				</div>
@@ -411,7 +420,7 @@
 
 				<!-- Bouton validation -->
 
-				<input  class="bouton2" type="submit" name="formulaire_edt" value="Valider">
+				<input  class="bouton2" type="submit" name="formulaire_insertion" value="Valider">
 				</fieldset>
 			</form>
 		</div>

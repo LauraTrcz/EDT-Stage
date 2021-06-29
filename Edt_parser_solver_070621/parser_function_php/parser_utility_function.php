@@ -730,18 +730,34 @@ function verification_attribute($attribute_verif){
 /////////////////////////////////////////////////////////
 //
 
-function parser_execute($nameXML,$nameOut,$ff):bool{
+function parser_execute($nameXML,$filenameInstance,$nameOut,$ff):bool{
 global $typeMap,$dzn,$xpath,$dico;
 
+
+$j = dirname(dirname(__FILE__));
+    if(substr(php_uname(), 0, 7) == "Windows"){
+      $j = $j."\\";
+    }
+    else{
+      $j = $j."/";
+    }
+
+
+//$j = "";
 //$xmlfile =  $argv["1"];
 $xmlfile =  $nameXML;
-$xmlfilename = basename($xmlfile);
+$xmlfilename = $xmlfile;//basename().$xmlfile;
+//echo "Ratchet : $xmlfilename \n";
 //$xmlfilename = "ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml";
 //$xmlfile = __DIR__ . "/" . $xmlfilename;
-$dznfilename =  substr($xmlfilename,0,-3)  . "dzn";
+//=========
+//$dznfilename =  substr($xmlfilename,0,-3)  . "dzn";
+$dznfilename =  $j.substr($filenameInstance,0,-3)  . "dzn";
 $dznfile = $dznfilename;
+//echo "Clanck : $dznfile \n";
 $dzn = fopen($dznfile,"w+");
 //
+//echo "$xmlfile";
 $xml = new DOMDocument();
 $xml->load($xmlfile);
 
@@ -839,6 +855,7 @@ $qry = $qTimetabling;
 $x = "nrWeeks";
 writeAttribute($x,$qry,1);
 $x = "nrDaysPerWeek";
+//echo "JE SUIS LE PLUS BEAU ".$x." \n";
 writeAttribute($x,$qry,1);
 $x = "nrSlotsPerDay";
 writeAttribute($x,$qry,1);

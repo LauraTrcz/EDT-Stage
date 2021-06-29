@@ -27,11 +27,34 @@ include 'parser_function_php/parser_function_solution.php';
  * pour l'instance abc.xml
  * cela donne ["solution_abc.xml","statistique_abc.csv"]
  */
+function debug_message($h){
+	print_r($h);
+	exit("fatal error");
+}
 
 function runParser($parameters):array{
 
+    $j = dirname(__FILE__);
+
+    if(substr(php_uname(), 0, 7) == "Windows"){
+      $j = $j."\\";
+    }
+    else{
+      $j = $j."/";
+    }
+
+
     $instance = $parameters["instance"];//nom de l'instance à traiter
-    $nameFileTT = substr($instance,0,-4);//nom du fichier 
+    $pathInstance = $parameters["instance"];//nom de l'instance à traiter
+     
+    if(substr(php_uname(), 0, 7) == "Windows"){
+        $instance = explode("\\", $instance);
+        $instance = $instance[sizeof($instance)-1];
+    }
+    else{$instance = explode("/", $instance);
+    $instance = $instance[sizeof($instance)-1];
+    }
+    $nameFileTT = substr($instance,0,-4);//nom du fichier
 
     $solver = $parameters["solver"];//type de solver utilisé (minizinc, CHR)
     $representation = $parameters["representation"];//type de représentation (intent, extent)
@@ -44,7 +67,7 @@ function runParser($parameters):array{
     if($solver == "minizinc"){//solveur minzinc
         //use minzinc solver
         //parsing instance with parser
-        parser_execute($instance,$fileParsing,$representation);
+        parser_execute($pathInstance,$instance,$fileParsing,$representation);
         //execute solver
         //exemple :
         //minizinc -a --solver Gecode tt.mzn xml2dzn/ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.dzn// -a allsolution
@@ -59,9 +82,22 @@ function runParser($parameters):array{
         $solverOfMinizinc = " --solver Gecode ";
         $outputFileMzn = " --output-to-file ";
         $outputFileStat = " > ";
-        $statFileOut = "statistique_".$nameFileTT.$dateTime.".txt";
-        $solutionFileOutTxt = "solution_".$nameFileTT.$dateTime.".txt";
-        $solutionFileOut = "solution_".$nameFileTT.$dateTime.".xml";
+
+        //$statFileOut = "D:\\xampp\\htdocs\\EDT-Stage\\Edt_parser_solver_070621\\" ."statistique_" .$nameFileTT.$dateTime.".txt";
+        $statFileOut = $j."statistique_" .$nameFileTT.$dateTime.".txt";
+	
+       // $solutionFileOutTxt = "D:\\xampp\\htdocs\\EDT-Stage\\Edt_parser_solver_070621\\solution_" .$nameFileTT.$dateTime.".txt";
+        $solutionFileOutTxt = $j."solution_" .$nameFileTT.$dateTime.".txt";
+
+
+        if(substr(php_uname(), 0, 7) == "Windows"){
+               $solutionFileOut = $j."solution_instance_xml"."\\"."solution_" .$nameFileTT.$dateTime.".xml";
+        }
+        else{
+              $solutionFileOut = $j."solution_instance_xml"."/"."solution_" .$nameFileTT.$dateTime.".xml";
+        }
+
+
         $outputStatCsv = substr($statFileOut,0,-3)."csv";
 
         if($allSolution == true){
@@ -69,15 +105,31 @@ function runParser($parameters):array{
         }
         //execution of minizinc solver !!!! WINDOWS CAN BUG
          if(substr(php_uname(), 0, 7) != "Windows"){
-        $output = shell_exec("minizinc ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item minizinc_solver/tt.mzn ".$fileParsing.$outputFileStat.$statFileOut);
+  //         print_r("\n minizinc ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item ".$j."minizinc_solver/tt.mzn ".$j.$fileParsing.$outputFileStat.$statFileOut."\n");
+//debug_message($j);
+        $output = shell_exec("minizinc ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item ".$j."minizinc_solver/tt.mzn ".$j.$fileParsing.$outputFileStat.$statFileOut);
+
          }
         else{
-            $output = shell_exec("C:\\\"Program Files\"\MiniZinc\minizinc.exe  ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item minizinc_solver\\tt.mzn ".$fileParsing.$outputFileStat.$statFileOut);
+            // echo "ALLLO1". $solutionFileOutTxt." ALLLO2 ";
+            // echo "PPPPPPPPP "."C:\\\"Program Files\"\\MiniZinc\\minizinc.exe ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item ".$j."minizinc_solver\\tt.mzn ".$j.$fileParsing.$outputFileStat.$statFileOut;
+           // $output = pclose(popen("C:\\\"Program Files\"\\MiniZinc\\minizinc.exe ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item minizinc_solver\\tt.mzn ".$fileParsing.$outputFileStat.$statFileOut,'r'));
+//$outputFileMzn.$solutionFileOutTxt
+$output = shell_exec("C:\\\"Program Files\"\\MiniZinc\\minizinc.exe".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item ".$j."minizinc_solver\\tt.mzn ".$j.$fileParsing);//.$all.$solverOfMinizinc.$stat.""." --output-mode item ".$j."minizinc_solver\\tt.mzn ".$j.$fileParsing.$outputFileStat.$statFileOut);
+
+//$output = shell_exec("C:\\\"Program Files\"\\MiniZinc\\minizinc.exe ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item ".$j."minizinc_solver\\tt.mzn ".$j.$fileParsing.$outputFileStat.$statFileOut);
+
+
+//$output = shell_exec("C:\\\"Program Files\"\\MiniZinc\\minizinc.exe ".$all.$solverOfMinizinc.$stat.$outputFileMzn.$solutionFileOutTxt." --output-mode item minizinc_solver\\tt.mzn ".$fileParsing.$outputFileStat.$statFileOut);
+
+             //echo "DDDDDDDDDDDDD ".$output."\n";
+             //return [];
         }
         //traitement des solutions générés par minizinc
-        writeSolutionXml($instance,$solutionFileOutTxt,$statFileOut,$outputStatCsv);
+        //echo "$instance,$solutionFileOutTxt,$statFileOut,$outputStatCsv";
+        return writeSolutionXml($pathInstance,$instance,$dateTime,$solutionFileOutTxt,$statFileOut,$outputStatCsv);
         //renvoie des names
-        return [$solutionFileOut,$outputStatCsv];
+        //return [$solutionFileOut,$outputStatCsv];
 
     }
     elseif($solver == "CHR" || $solver =="chr"){//Solveur CHR
@@ -94,6 +146,7 @@ function runParser($parameters):array{
  /*
 //fichier par defaut
 $st = "ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml";
+$st = "/home/etudiant/Projet_EDT/timetabling/src/mzn/ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml";
 
 //récupération de argv[1]
 if(sizeof($argv)>1){

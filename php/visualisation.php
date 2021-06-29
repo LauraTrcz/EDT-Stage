@@ -288,7 +288,7 @@
 		switch($filtre_solver){
 
 			case 'MZN': {
-			    $reponse = $db->query('SELECT * FROM solutions WHERE solver = "MZN" ORDER BY timestamp_t DESC');
+			    $reponse = $db->query('SELECT * FROM solutions WHERE solver = "minizinc" ORDER BY timestamp_t DESC');
 		        $data_solutions = $reponse->fetchAll();
 		        break;
 		    }
@@ -307,12 +307,12 @@
 		switch($filtre_format){
 
 			case 'DZN': {
-			    $reponse = $db->query('SELECT * FROM solutions WHERE format = "DZN" ORDER BY timestamp_t DESC');
+			    $reponse = $db->query('SELECT * FROM solutions WHERE format = "dzn" ORDER BY timestamp_t DESC');
 		        $data_solutions = $reponse->fetchAll();
 		        break;
 		    }
 			case 'JSON': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE format = "CHR" ORDER BY timestamp_t DESC');
+				$reponse = $db->query('SELECT * FROM solutions WHERE format = "json" ORDER BY timestamp_t DESC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
@@ -326,12 +326,12 @@
 		switch($filtre_representation){
 
 			case 'INT': {
-			    $reponse = $db->query('SELECT * FROM solutions WHERE representation = "Intension" ORDER BY timestamp_t DESC');
+			    $reponse = $db->query('SELECT * FROM solutions WHERE representation = "intent" ORDER BY timestamp_t DESC');
 		        $data_solutions = $reponse->fetchAll();
 		        break;
 		    }
 			case 'EXT': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE representation = "Extension" ORDER BY timestamp_t DESC');
+				$reponse = $db->query('SELECT * FROM solutions WHERE representation = "extent" ORDER BY timestamp_t DESC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
@@ -344,7 +344,7 @@
 
 		switch($filtre_tcf){
 
-			case '0': {
+			case '0': {	//A REMPLACER
 			    $reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Droit-Eco-Gestion" ORDER BY timestamp_t DESC');
 		        $data_solutions = $reponse->fetchAll();
 		        break;
@@ -379,25 +379,25 @@
 		switch($tri_tableau2){
 
 			// ordre croissant
-			case 'AC': {
-				$reponse = $db->query('SELECT * FROM probleme ORDER BY timestamp_t ASC');
+			case 'DC2': {
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY timestamp_t ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-			case 'AUC': {
-				$reponse = $db->query('SELECT * FROM probleme ORDER BY auteur ASC');
+			case 'TFCC': {	//A REMPLACER
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY auteur ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
 
 
 			// ordre décroissant
-			case 'OD': {
+			case 'DD2': {
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY timestamp_t DESC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-			case 'PD': {
+			case 'TFCD': {	//A REMPLACER
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY periode DESC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
@@ -719,7 +719,7 @@
 
 		<div class="tableau-2">
 
-			<h2>Table <i>"Solutions</i></h2>
+			<h2>Table <i>"Solutions"</i></h2>
 
 			<!-- Filtres -->
 
@@ -875,7 +875,7 @@
 					        <th class="th2">Format</th>
 					        <th class="th2">Représentation</th>
 					        <th class="th2 th3">Temps de calcul souhaité</th>
-					        <th class="th2 th3">Solution</th>
+					        <th class="th2 th3">Fichier solution</th>
 					        <th class="th2">Temps de calcul final</th>
 					        <th class="th2">Stat 2</th>
 					        <th class="th2">Stat 3</th>
@@ -890,13 +890,15 @@
 				    	?>
 				        <tbody>
 				        	<tr>
-					            <td><?php echo $value['fichier'];?></td>
-					            <td><?php echo $value['auteur'];?></td>
-					            <td><?php echo $value['composantes'];?></td>
-					            <td><?php echo $value['filiere'];?></td>
-					            <td><?php echo $value['formation'];?></td>
-					            <td><?php echo $value['annee'];?></td>
-					            <td><?php echo $value['periode'];?></td>
+					            <td><?php echo $value['fichier_probleme'];?></td>
+					            <td><?php echo $value['solver'];?></td>
+					            <td><?php echo $value['format'];?></td>
+					            <td><?php echo $value['representation'];?></td>
+					            <td><?php echo $value['temps_calcul'];?></td>
+					            <td><?php echo $value['fichier_solution'];?></td>
+					            <td><?php echo $value['stat_2'];?></td>
+					            <td><?php echo $value['stat_3'];?></td>
+					            <td><?php echo $value['stat_4'];?></td>
 				        	</tr>
 				     	</tbody>
 				        <?php
