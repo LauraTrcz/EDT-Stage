@@ -3,6 +3,11 @@
 	include ('database.php');
 	global $db;
 	$value = 0;
+	global $tab;
+	global $name_instance;
+	global $instance_name;
+	$instance_name = "";
+
 
 	//focus sur le dossier contenant les fichiers xml
 	$dir = glob('../instance_xml/*.xml');
@@ -282,7 +287,19 @@
 
 	// Instance
 
-	if(isset($_GET['filtre_solver'])) {
+	if(isset($_GET['filtre_instance'])){
+		$filtre_instance = htmlspecialchars($_GET['filtre_instance']);
+		//echo "$filtre_instance";
+		$data_solutions = $db->query('SELECT * FROM solutions WHERE fichier_probleme = "'.$filtre_instance.'" ORDER BY timestamp_t DESC');
+		//$message = 'SELECT * FROM solutions WHERE fichier_probleme = "'.$filtre_instance.'" ORDER BY timestamp_t DESC';
+		//echo "$message";
+		//print_r($tab);
+		//print_r($instance_name);
+	}
+
+	//Solver
+
+	else if(isset($_GET['filtre_solver'])) {
 		$filtre_solver = htmlspecialchars($_GET['filtre_solver']);
 
 		switch($filtre_solver){
@@ -304,6 +321,10 @@
 	}else if(isset($_GET['filtre_format'])) {
 		$filtre_format = htmlspecialchars($_GET['filtre_format']);
 
+		$tab = [$DZN => "dzn", $JSON => "json"];
+		$reponse = $db->query('SELECT * FROM solutions WHERE solver = "'.$filtre_format.'" ORDER BY timestamp_t DESC');
+		$data_solutions = $reponse->fetchAll();
+		/*
 		switch($filtre_format){
 
 			case 'DZN': {
@@ -316,7 +337,7 @@
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-	    }
+	    }*/
 
 	// Représentation
 
@@ -775,7 +796,7 @@
 								<option disabled selected value> -- Sélectionner -- </option>
 								<?php foreach ($dir as $key => $instance) { //retourne une liste
 									?>
-									<option value="<?php $instance_name = print_r(basename($instance)); ?>"><?php $instance_name = print_r(basename($instance)); ?></option> 
+									<option value="<?php $name_instance = print_r(basename($instance)); ?>"><?php $name_instance = print_r(basename($instance)); ?></option> 
 									<!-- Nom du fichier sans le chemin "xml/"" -->
 								<?php
 								}
@@ -969,7 +990,8 @@
 				</div>
 			    <div class="table_body2">
 			    	<table>
-				    	<?php 
+				    	
+						<?php
 				    	foreach ($data_solutions as $key => $value) //Affichage tableau ligne par ligne
 				    	{
 				    	?>
@@ -994,7 +1016,7 @@
 				        	</tr>
 				     	</tbody>
 				        <?php
-					    }
+				       	}
 					        if(!$value || !$data_solutions){	//Si aucune valeur trouvée
 					        echo "Aucun résultat ne correspond à vos critères";
 					    }
@@ -1004,5 +1026,7 @@
 			</div>
 		</div>
 	</section>
+
+
 </body>
 </html>
