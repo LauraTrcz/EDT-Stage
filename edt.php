@@ -3,6 +3,10 @@
 	include 'php/database.php';
 	include 'Edt_parser_solver_070621/parser_edt.php';
 	global $db;
+	global $writeExec;
+	global $instance;
+	$instance = 0;
+	$writeExec = true;
 
 	//focus sur le dossier contenant les fichiers xml
 	$dossier = glob('instance_xml/*.xml');
@@ -16,7 +20,7 @@
 
 		if(!empty($instance) && !empty($solver) && !empty($format) && !empty($representation) && !empty($temps_calcul)) { /*tant que le formulaire n'est pas vide*/
 
-			$i = $db->prepare("INSERT INTO solutions(fichier_probleme,solver,format,representation,temps_calcul,initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	//["place dans la bdd","clé"] => ["clé","valeur"]
+			$i = $db->prepare("INSERT INTO solutions(fichier_probleme,solver,format,representation,temps_calcul,fichier_solution,initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	//["place dans la bdd","clé"] => ["clé","valeur"]
 			$i -> bindParam(1,$instance);
 			$i -> bindParam(2,$solver);
 			$i -> bindParam(3,$format);
@@ -24,14 +28,12 @@
 			$i -> bindParam(5,$temps_calcul);
 			//$i->execute(['instance' => $instance, 'solver' => $solver, 'format' => $format, 'representation' => $representation, 'temps_calcul' => $temps_calcul]);
 
-			echo "Données entrées\n";
-
 			//on redéclare la variable instance en ajoutant le path une fois que le fichier a été mis dans la base de données pour ne pas avoir de souci avec le parser
 
-			$instance= "instance_xml\\".$instance; //anti-slash = système, slash = PHP
+			$instance2 = "instance_xml\\".$instance; //anti-slash = système, slash = PHP
 			
 			$parametres = [
-			    "instance"=> $instance,
+			    "instance" => $instance2,
 			    "solver"=> $solver,
 			    "format"=> $format,
 			    "representation"=> $representation,
@@ -40,29 +42,71 @@
 
 			//shell_exec("del statistique_instance_xml\\*.txt"); //delete tous les fichiers .txt dans le dossier
 
-			$solution = runParser($parametres);
-			//print_r($solution);
+			//try catch pour attraper les erreurs
 
-			//commande lire fichier csv
-			//$cs = explode("\",$solution[1])[];
-			$csv = $solution[0];  //solution est un tableau contenant [fichier_solution_xml, fichier_stats_csv] d'où indice 1
-			foreach(file($csv) as $line_csv){	//lit le fichier csv et crée un tableau, ; sépare deux cellules d'une ligne
-				$valid_data = str_getcsv($line_csv,";");
-				if(!in_array($hh[0],["solutions"])){	//cherche dans la 1e colonne du tableau hh un tableau de ce que tu veux pas, ici "solutions" seulement
-					$data[] = $valid_data;
+			try{	//vérifier que les fichiers xml et csv ont été générés
+				$solution = runParser($parametres);
+			} catch(Exception $e) {
+				echo "<script>alert(\"Aucun fichier généré\");</script>";
+				$writeExec = false;
+			}
+
+
+
+			if($writeExec){	//si la solution ne retourne pas [] ni ["",""] (si deux fichiers sont créés)
+
+				//commande lire fichier csv
+				$csv = $solution[0];  //solution est un tableau contenant [fichier_stats_csv, fichier_solution_xml] d'où indice 0
+				$xml_verify = $solution[1];
+				$xml = basename($xml_verify); //fichier xml
+				$fileCsv = 0;
+				$i->bindParam(6, $xml); //bindParam le fichier xml solution
+
+				try{	//sécurité
+					//$xml_verify.="11";
+					if(!file_exists($xml_verify)){ //vérifie que le fichier xml est créé
+						throw new Exception('Le fichier xml n\'existe pas! :(');
+					}
+					//$xml = [];
+					if($xml_verify == []){	//vérifie que le fichier xml n'est pas vide
+						throw new Exception('Le fichier xml est vide! :(');
+					}	
+					//$csv.="11";
+					if(!file_exists($csv)){ //vérifie que le fichier csv est créé
+						throw new Exception('Le fichier csv n\'existe pas! :(');
+					}
+					$fileCsv = file($csv);
+					//$fileCsv = [];
+					if($fileCsv == []){ //vérifie que le fichier csv n'est pas vide
+						throw new Exception('Le fichier csv est vide! :(');
+					}
+				} catch(Exception $exception){
+					echo "<script>alert(\"".$exception->getMessage()."\");</script>";
+					$writeExec = false;
 				}
 			}
 
-			//$handle = fopen($csv, "r");
-			//$data_csv = fgetcsv($handle, 1024, ";");
+			if($writeExec){	// si tout est bon
+				
 
-			//enregistrement des stats du fichier csv dans la bdd
-			//$i = $db->prepare("INSERT INTO solutions(initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (:initTime, :solveTime, :variables, :propagators, :propagations,:nodes,:failures,:restarts,:peakDepth)");
-			for($j = 6;$j<15;$j++){
-				$i -> bindParam($j,$data[$j-6][1]);
+				foreach($fileCsv as $line_csv){	//lit le fichier csv et crée un tableau, ; sépare deux cellules d'une ligne
+					$valid_data = str_getcsv($line_csv,";");
+					if(!in_array($valid_data[0],["solutions"])){	//cherche dans la 1e colonne du tableau $valid_data un tableau de ce que tu veux pas, ici "solutions" seulement
+						$data[] = $valid_data;	//le tableau valide
+					}
+				}
+
+				//$handle = fopen($csv, "r");
+				//$data_csv = fgetcsv($handle, 1024, ";");
+
+				//enregistrement des stats du fichier csv dans la bdd
+				//$i = $db->prepare("INSERT INTO solutions(initTime,solveTime,variables,propagators,propagations,nodes,failures,restarts,peakDepth) VALUES (:initTime, :solveTime, :variables, :propagators, :propagations,:nodes,:failures,:restarts,:peakDepth)");
+				for($j = 7;$j<16;$j++){
+					$i -> bindParam($j,$data[$j-7][1]);
+				}
+				
+				$i->execute(/*['initTime' => $data[0][1], 'solveTime' => $data[1][1], 'variables' => $data[3][1], 'propagators' => $data[4][1], 'propagations' => $data[5][1], 'nodes' => $data[6][1], 'failures' => $data[7][1], 'restarts' => $data[8][1], 'peakDepth' => $data[9,1]]*/);
 			}
-			$i->execute(/*['initTime' => $data[0][1], 'solveTime' => $data[1][1], 'variables' => $data[3][1], 'propagators' => $data[4][1], 'propagations' => $data[5][1], 'nodes' => $data[6][1], 'failures' => $data[7][1], 'restarts' => $data[8][1], 'peakDepth' => $data[9][1]]*/);
-			echo "Données entrées";
 		}	
 	}
 ?>
@@ -118,7 +162,7 @@
 						<option disabled selected value> -- Sélectionner -- </option>
 						<?php foreach ($dossier as $key => $instance) { //retourne une liste
 							?>
-							<option value="<?php print_r(basename($instance)); ?>"><?php print_r(basename($instance)); ?></option> <!-- Nom du fichier sans le chemin "xml/" -->
+							<option value="<?php print_r(basename($instance))?>"><?php print_r(basename($instance)); ?></option> <!-- Nom du fichier sans le chemin "xml/" -->
 						<?php
 						}
 						?>
@@ -213,13 +257,83 @@
 				<!-- Bouton GO -->
 			
 				<div class="valider">
-					<input class="bouton" type="submit" name="formulaire_edt" id="select" value="Go">
+					<input class="bouton2" type="submit" name="formulaire_edt" id="select" value="Go">
 				</div>
 				</fieldset>
 			</form>
 		</div>
 	</section>
-	<section class="resultats">
-		
+
+
+		<?php
+		if (isset($_POST['formulaire_edt']) && ($writeExec == true) ) { //si on a envoyé le formulaire et que tout est ok du côté du programme
+		?>
+
+		<hr noshade width="90%" size="3" align="center" color="black">
+
+		<!-- Affichage des résultats -->
+
+		<section class="resultats">
+
+			<h2>Résultats</h2>
+			<div class="resultats2">
+			<div>
+				<h3>Fichiers</h3>
+				<table>
+					<tr>
+						<td class="thead">Fichier <i>.csv :</i></td>
+						<td><?php print_r(basename($csv));?></td>	<!--csv possède le chemin système ! -->
+					</tr>
+					<tr>
+						<td class="thead">Fichier <i>.xml :</i></td>
+						<td><?php print_r($xml);?></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<h3>Statistiques</h3>
+				<table>
+					<tr>
+						<td class="thead">initTime</td>
+						<td><?php print_r($data[0][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">solveTime</td>
+						<td><?php print_r($data[1][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">variables</td>
+						<td><?php print_r($data[2][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">propagators</td>
+						<td><?php print_r($data[3][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">propagations</td>
+						<td><?php print_r($data[4][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">nodes</td>
+						<td><?php print_r($data[5][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">failures</td>
+						<td><?php print_r($data[6][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">restarts</td>
+						<td><?php print_r($data[7][1]);?></td>
+					</tr>
+					<tr>
+						<td class="thead">peakDepth</td>
+						<td><?php print_r($data[8][1]);?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<?php
+		}
+		?>		
 	</section>
 </body>

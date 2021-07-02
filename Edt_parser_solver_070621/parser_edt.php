@@ -127,7 +127,12 @@ $output = shell_exec("C:\\\"Program Files\"\\MiniZinc\\minizinc.exe".$all.$solve
         }
         //traitement des solutions générés par minizinc
         //echo "$instance,$solutionFileOutTxt,$statFileOut,$outputStatCsv";
-        return writeSolutionXml($pathInstance,$instance,$dateTime,$solutionFileOutTxt,$statFileOut,$outputStatCsv);
+        $resultcsvxml =  writeSolutionXml($pathInstance,$instance,$dateTime,$solutionFileOutTxt,$statFileOut,$outputStatCsv);
+        //$resultcsvxml = [];
+        if($resultcsvxml == [] || $resultcsvxml == ["",""]){
+                throw new Exception("Solution doesnt exist");
+        }
+        return $resultcsvxml;
         //renvoie des names
         //return [$solutionFileOut,$outputStatCsv];
 

@@ -12,7 +12,7 @@
 
 	// Composantes
 
-	if(isset($_GET['filtre_composante'])) {
+	if(isset($_GET['filtre_composante'])) { //filtre composantes classées par date de publication décroissante
 		$filtre_composante = htmlspecialchars($_GET['filtre_composante']);
 
 		switch($filtre_composante){
@@ -56,7 +56,7 @@
 
 	// Filières
 
-	} else if(isset($_GET['filtre_filiere'])) {
+	} else if(isset($_GET['filtre_filiere'])) {	//filtre filières classées par date de publication décroissante
 		$filtre_filiere = htmlspecialchars($_GET['filtre_filiere']);
 
 		switch($filtre_filiere){
@@ -90,43 +90,43 @@
 
 	// Année
 
-	} else if (isset($_GET['filtre_annee'])) {
+	} else if (isset($_GET['filtre_annee'])) { //années classées par filière (ordre alphabétique)
 		$filtre_annee = htmlspecialchars($_GET['filtre_annee']);
 
 		switch($filtre_annee){
 
 			case '2021': {
-			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2021" ORDER BY periode DESC');
+			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2021" ORDER BY filiere ASC');
 		        $data_instances = $reponse->fetchAll();
 		        break;
 		    }
 			case '2020': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE annee = "2020" ORDER BY periode DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE annee = "2020" ORDER BY filiere ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case '2019': {
-	            $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2019" ORDER BY periode DESC');
+	            $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2019" ORDER BY filiere ASC');
 	            $data_instances = $reponse->fetchAll();
 	            break;
 	        }
 			case '2018': {
-	            $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2018" ORDER BY periode DESC');
+	            $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2018" ORDER BY filiere ASC');
 	            $data_instances = $reponse->fetchAll();
 	            break;
 	        }
 			case '2017': {
-			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2017" ORDER BY periode DESC');
+			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2017" ORDER BY filiere ASC');
 		        $data_instances = $reponse->fetchAll();
 		        break;
 		    }
 		    case '2016': {
-			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2016" ORDER BY periode DESC');
+			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2016" ORDER BY filiere ASC');
 		        $data_instances = $reponse->fetchAll();
 		        break;
 		    }
 		    case '2015': {
-			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2015" ORDER BY periode DESC');
+			    $reponse = $db->query('SELECT * FROM probleme WHERE annee = "2015" ORDER BY filiere ASC');
 		        $data_instances = $reponse->fetchAll();
 		        break;
 		    }
@@ -134,78 +134,78 @@
 
 	// Periode
 
-	} else if (isset($_GET['filtre_periode'])) {
+	} else if (isset($_GET['filtre_periode'])) { //periode classées par annee décroissante
 		$filtre_periode = htmlspecialchars($_GET['filtre_periode']);
 
 		switch($filtre_periode){
 
 			case 'S1': {
-			    $reponse = $db->query('SELECT * FROM probleme WHERE periode = "Semestre 1" ORDER BY date_t DESC');
+			    $reponse = $db->query('SELECT * FROM probleme WHERE periode = "Semestre 1" ORDER BY annee DESC');
 		        $data_instances = $reponse->fetchAll();
 		        break;
 		    }
 			case 'S2': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Semestre 2" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Semestre 2" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P1': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P1" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P1" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P2': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P2" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P2" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P3': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P3" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P3" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P4': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P4" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P4" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P5': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P5" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P5" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P6': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P6" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P6" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P7': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P7" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P7" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P8': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P8" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P8" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P9': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P9" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P9" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P10': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P10" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P10" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P11': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P11" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P11" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P12': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P12" ORDER BY date_t DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P12" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
@@ -219,55 +219,55 @@
 		switch($tri_tableau1){
 
 			// ordre croissant
-			case 'AC': {
+			case 'AC': { //tri par année croissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY annee ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'AUC': {
+			case 'AUC': { //tri par ordre alphabétique auteur croissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY auteur ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'DC': {
+			case 'DC': { //tri par date de publication croissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY date_t ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'OC': {
+			case 'OC': { //tri par ordre alphabétique formation croissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY formation ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'PC': {
-				$reponse = $db->query('SELECT * FROM probleme ORDER BY periode ASC');
+			case 'PC': { //tri par période croissant (ERROR)
+				$reponse = $db->query('SELECT * FROM probleme ORDER BY CHAR_LENGTH(periode) ASC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			} 
 
 			// ordre décroissant
-			case 'AD': {
+			case 'AD': { //tri par année décroissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'AUD': {
+			case 'AUD': { //tri par ordre alphabétique auteur décroissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY auteur DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'DD': {
+			case 'DD': { //tri par date de publication décroissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY date_t DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'OD': {
+			case 'OD': { //tri par ordre alphabétique formation décroissant
 				$reponse = $db->query('SELECT * FROM probleme ORDER BY formation DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
-			case 'PD': {
-				$reponse = $db->query('SELECT * FROM probleme ORDER BY periode DESC');
+			case 'PD': { //tri par période décroissant (ERROR)
+				$reponse = $db->query('SELECT * FROM probleme ORDER BY CHAR_LENGTH(periode) DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
@@ -280,7 +280,7 @@
 	//------------------------------------------ TABLEAU 2 --------------------------------------------------------------------------------------------------------
 	//------------------------------------------ FILTRES ----------------------------------------------------------------------------------------------------------
 
-	// Solver
+	// Instance
 
 	if(isset($_GET['filtre_solver'])) {
 		$filtre_solver = htmlspecialchars($_GET['filtre_solver']);
@@ -337,35 +337,35 @@
 			}
 	    }
 
-	// Temps de calcul final
+	// Solve Time (intervalles)
 
-	}else if(isset($_GET['filtre_tcf'])) {
-		$filtre_tcf = htmlspecialchars($_GET['filtre_tcf']);
+	}else if(isset($_GET['filtre_solveTime'])) {
+		$filtre_solveTime = htmlspecialchars($_GET['filtre_solveTime']);
 
-		switch($filtre_tcf){
+		switch($filtre_solveTime){
 
-			case '0': {	//A REMPLACER
-			    $reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Droit-Eco-Gestion" ORDER BY timestamp_t DESC');
+			case '0': {
+			    $reponse = $db->query('SELECT * FROM solutions WHERE solveTime BETWEEN "0.000" AND "59.000" ORDER BY CAST(solveTime as FLOAT) ASC');
 		        $data_solutions = $reponse->fetchAll();
 		        break;
 		    }
 			case '1': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Lettres-Langues-Sciences Humaines" ORDER BY timestamp_t DESC');
+				$reponse = $db->query('SELECT * FROM solutions WHERE solveTime BETWEEN "59.000" AND "299.000" ORDER BY CAST(solveTime as FLOAT) ASC');
+			    $data_solutions = $reponse->fetchAll();
+			     break;
+			}
+			case '5': {
+				$reponse = $db->query('SELECT * FROM solutions WHERE solveTime BETWEEN "300.000" AND "599.000" ORDER BY CAST(solveTime as FLOAT) ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
 			case '10': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Lettres-Langues-Sciences Humaines" ORDER BY timestamp_t DESC');
+				$reponse = $db->query('SELECT * FROM solutions WHERE solveTime BETWEEN "600.000" AND "1199.000" ORDER BY CAST(solveTime as FLOAT) ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
 			case '20': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Lettres-Langues-Sciences Humaines" ORDER BY timestamp_t DESC');
-			    $data_solutions = $reponse->fetchAll();
-			     break;
-			}
-			case '59': {
-				$reponse = $db->query('SELECT * FROM solutions WHERE stat_calcul = "UFR-Lettres-Langues-Sciences Humaines" ORDER BY timestamp_t DESC');
+				$reponse = $db->query('SELECT * FROM solutions WHERE solveTime BETWEEN "1200.000" AND "3599.000" ORDER BY CAST(solveTime as FLOAT) ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
@@ -384,8 +384,8 @@
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-			case 'TFCC': {	//A REMPLACER
-				$reponse = $db->query('SELECT * FROM solutions ORDER BY auteur ASC');
+			case 'STC': {	//A REMPLACER
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(solveTime as FLOAT) ASC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
@@ -397,8 +397,8 @@
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-			case 'TFCD': {	//A REMPLACER
-				$reponse = $db->query('SELECT * FROM solutions ORDER BY periode DESC');
+			case 'STD': {	//A REMPLACER
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(solveTime as FLOAT) DESC');
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
@@ -447,6 +447,8 @@
 
 	<section class="page">
 		<h1>Base de données</h1>
+
+		<!-- Tableau 1 : Visualisation des instances + métadonnées -->
 
 		<div class="tableau-1">
 
@@ -632,10 +634,10 @@
 						<div class="boite">
 							<input  class="bouton2" type="submit" name="formulaire_instances" id="formulaire_instances" value="Filtrer">
 						</div>
+
+						<br><hr noshade width="100%" size="3" align="center" color="black">
 					</form>
 				</div>
-
-				<hr noshade width="90%" size="3" align="center" color="black">
 
 				<!-- Tri -->
 
@@ -663,8 +665,43 @@
 							</select>
 		               	 	<input class="bouton2" type="submit" name="tri" id="tri" value="Trier">
 		               	 </div>
+		               	 <br><hr noshade width="100%" size="3" align="center" color="black">
 					</form>
 				</div>
+
+				<!-- Export -->
+
+				<div class="exporter">
+
+					<form method='POST' action='export.php'>
+
+						<h3 class="co">Exporter</h3>
+
+						<?php 
+						    $result = $db->query('SELECT * FROM probleme ORDER BY id ASC'); //on ordonne par id (insertion)
+						    $probleme_arr = array();
+						    foreach($result as $row){	//on associe les valeurs des colonnes à des variables
+							    $id = $row['id'];
+							    $fichier = $row['fichier'];
+							    $date_t = $row['date_t'];
+							    $auteur = $row['auteur'];
+							    $composantes = $row['composantes'];
+							    $filiere = $row['filiere'];
+							    $formation = $row['formation'];
+							    $annee = $row['annee'];
+							    $periode = $row['periode'];
+							    $probleme_arr[] = array($id,$fichier,$date_t,$auteur,$composantes,$filiere,$formation,$annee,$periode); //variables dans tableau
+							}
+
+					    	$serialize_probleme_arr = serialize($probleme_arr); //sérialize (prépare à la sauvegarde en retournant une chaîne contenant une représentation linéaire pour être stockée)
+						?>
+
+						<input class="bouton2" type='submit' value='export' name='export'>
+					    <textarea name='export_data' style='display: none;'><?php echo $serialize_probleme_arr; ?></textarea>
+					
+					</form>
+				</div>
+
 			</aside>
 
 
@@ -715,7 +752,7 @@
 		</div>
 
 
-		<!-- Visualisation des solutions et statistiques -->
+		<!-- Tableau 2 : Visualisation des solutions et statistiques -->
 
 		<div class="tableau-2">
 
@@ -738,7 +775,7 @@
 								<option disabled selected value> -- Sélectionner -- </option>
 								<?php foreach ($dir as $key => $instance) { //retourne une liste
 									?>
-									<option value="<?php print_r(basename($instance)); ?>"><?php print_r(basename($instance)); ?></option> 
+									<option value="<?php $instance_name = print_r(basename($instance)); ?>"><?php $instance_name = print_r(basename($instance)); ?></option> 
 									<!-- Nom du fichier sans le chemin "xml/"" -->
 								<?php
 								}
@@ -802,24 +839,24 @@
 							<input type="button" value="Temps de calcul final" class="bouton" onclick="showTCF('div11');"/>
 							<div style="display:none" id="div11">
 								<div class="choix">
-									<label for="filtre_tcf">0 => 59s</label>
-									<input type="checkbox" class="checkbox" name="filtre_tcf" value="0">
+									<label for="filtre_solveTime">0 => 59s</label>
+									<input type="checkbox" class="checkbox" name="filtre_solveTime" value="0">
 								</div>
 								<div class="choix">
-									<label for="filtre_tcf">1 => 4.99min</label>
-									<input type="checkbox" class="checkbox" name="filtre_tcf" value="5">
+									<label for="filtre_solveTime">1 => 4.99min</label>
+									<input type="checkbox" class="checkbox" name="filtre_solveTime" value="5">
 								</div>
 								<div class="choix">
-									<label for="filtre_tcf">5 => 9.99min</label>
-									<input type="checkbox" class="checkbox" name="filtre_tcf" value="10">
+									<label for="filtre_solveTime">5 => 9.99min</label>
+									<input type="checkbox" class="checkbox" name="filtre_solveTime" value="10">
 								</div>
 								<div class="choix">
-									<label for="filtre_tcf">10 => 19.99min</label>
-									<input type="checkbox" class="checkbox" name="filtre_tcf" value="20">
+									<label for="filtre_solveTime">10 => 19.99min</label>
+									<input type="checkbox" class="checkbox" name="filtre_solveTime" value="20">
 								</div>
 								<div class="choix">
-									<label for="filtre_tcf">20 => 59.99min</label>
-									<input type="checkbox" class="checkbox" name="filtre_tcf" value="59">
+									<label for="filtre_solveTime">20 => 59.99min</label>
+									<input type="checkbox" class="checkbox" name="filtre_solveTime" value="59">
 								</div>
 							</div>
 						</div>
@@ -828,10 +865,10 @@
 						<div class="boite">
 							<input  class="bouton2" type="submit" name="formulaire_solutions" value="Filtrer">
 						</div>
+
+						<br><br><hr noshade width="100%" size="3" align="center" color="black">
 					</form>
 				</div>
-
-				<hr noshade width="90%" size="3" align="center" color="black">
 
 				<!-- Tri -->
 
@@ -842,16 +879,57 @@
 							<select class="bouton3" name="tri_tableau2" type="submit">
 								<option disabled selected value> -- Sélectionner -- </option>
 								<optgroup label="Ordre croissant">
-									<option value="DC2">Date</option>
-									<option value="TCFC">Temps de calcul final</option>
+									<option value="DC2">Timestamp</option>
+									<option value="STC">Solve Time</option>
 								</optgroup>
 								<optgroup label="Ordre décroissant">
-									<option value="DD2">Date</option>
-									<option value="TFCD">Temps de calcul final</option>
+									<option value="DD2">Timestamp</option>
+									<option value="STD">Solve Time</option>
 								</optgroup>
 							</select>
 		               	 	<input class="bouton2" type="submit" name="tri" id="tri" value="Trier">
 		               	 </div>
+					</form>
+				</div>
+
+				<!-- Export -->
+
+				<div class="exporter">
+
+					<form method='POST' action='export.php'>
+
+						<h3 class="co">Exporter</h3>
+
+						<?php 
+						    $result = $db->query('SELECT * FROM solutions ORDER BY id ASC');
+						    $probleme_arr = array();
+						    foreach($result as $row){
+							    $id = $row['id'];
+							    $fichier_probleme = $row['fichier_probleme'];
+							    $solver = $row['solver'];
+							    $format = $row['format'];
+							    $representation = $row['representation'];
+							    $temps_calcul = $row['temps_calcul'];
+							    $fichier_solution = $row['fichier_solution'];
+							    $timestamp_t = $row['timestamp_t'];
+							    $initTime = $row['initTime'];
+							    $solveTime = $row['solveTime'];
+							    $variables = $row['variables'];
+							    $propagators = $row['propagators'];
+							    $propagations = $row['propagations'];
+							    $nodes = $row['nodes'];
+							    $failures = $row['failures'];
+							    $restarts = $row['restarts'];
+							    $peakDepth = $row['peakDepth'];
+							    $probleme_arr[] = array($id, $fichier_probleme, $solver, $format, $representation, $temps_calcul, $fichier_solution, $timestamp_t, $initTime, $solveTime, $variables, $propagators, $propagations, $nodes, $failures, $restarts, $peakDepth);
+							}
+
+					    	$serialize_probleme_arr = serialize($probleme_arr);
+						?>
+
+						<input class="bouton2" type='submit' value='export' name='export'>
+					    <textarea name='export_data2' style='display: none;'><?php echo $serialize_probleme_arr; ?></textarea>
+					
 					</form>
 				</div>
 			</aside>
@@ -865,8 +943,8 @@
 				        <thead>
 				            <tr class="tr1">
 						        <th colspan="5">Paramètres</th>
-						        <th colspan="1">Solution</th>
-						        <th colspan="3">Statistiques</th>
+						        <th colspan="2">Solution</th>
+						        <th colspan="9">Statistiques</th>
 				        	</tr>
 				        </thead>
 				        <tr class="table_header2">
@@ -876,9 +954,16 @@
 					        <th class="th2">Représentation</th>
 					        <th class="th2 th3">Temps de calcul souhaité</th>
 					        <th class="th2 th3">Fichier solution</th>
-					        <th class="th2">Temps de calcul final</th>
-					        <th class="th2">Stat 2</th>
-					        <th class="th2">Stat 3</th>
+					        <th class="th2 th3">Timestamp</th>
+					        <th class="th2">initTime</th>
+					        <th class="th2">solveTime</th>
+					        <th class="th2">variables</th>
+					        <th class="th2">propagators</th>
+					        <th class="th2">propagations</th>
+					        <th class="th2">nodes</th>
+					        <th class="th2">failures</th>
+					        <th class="th2">restarts</th>
+					        <th class="th2">peakDepth</th>
 				        </tr>
 				    </table>
 				</div>
@@ -896,9 +981,16 @@
 					            <td><?php echo $value['representation'];?></td>
 					            <td><?php echo $value['temps_calcul'];?></td>
 					            <td><?php echo $value['fichier_solution'];?></td>
-					            <td><?php echo $value['stat_2'];?></td>
-					            <td><?php echo $value['stat_3'];?></td>
-					            <td><?php echo $value['stat_4'];?></td>
+					            <td><?php echo $value['timestamp_t'];?></td>
+					            <td><?php echo $value['initTime'];?></td>
+					            <td><?php echo $value['solveTime'];?></td>
+					            <td><?php echo $value['variables'];?></td>
+					            <td><?php echo $value['propagators'];?></td>
+					            <td><?php echo $value['propagations'];?></td>
+					            <td><?php echo $value['nodes'];?></td>
+					            <td><?php echo $value['failures'];?></td>
+					            <td><?php echo $value['restarts'];?></td>
+					            <td><?php echo $value['peakDepth'];?></td>
 				        	</tr>
 				     	</tbody>
 				        <?php

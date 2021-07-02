@@ -16,7 +16,7 @@ header{
   display: flex; /*Les blocs se placent les uns à côté des autres*/
   margin-left: 1.5%;  /*centrer la barre de menu*/
   align-items: center;
-  background: linear-gradient(180deg, rgba(159,29,181,1) 0%, rgba(89,0,255,1) 100%); /*dégradé violet bleu*/
+  background-color: rgb(72, 61, 139);
 }
 
 header img{
@@ -62,6 +62,24 @@ header img{
   justify-content: center;  /*formulaire centré*/
 }
 
+.formulaires{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  height: auto;
+}
+
+.formulaires div{
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: auto;
+}
+
 .formulaire{
   margin: 10px; /*marge*/
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);  /*effet ombre*/
@@ -74,16 +92,10 @@ fieldset{ /*confondre le fieldset avec le formulaire (enlève l'espace par défa
 }
 
 .boite{ /*espaces entre les boites*/
-  margin: 25px;
+  margin: 15px;
   padding: 10px;
 }
 
-.boite-row{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-}
 
 .boite2{
   display: flex;
@@ -100,15 +112,16 @@ fieldset{ /*confondre le fieldset avec le formulaire (enlève l'espace par défa
 
 /*Boutons*/
 
-.bouton, .radio, .bouton2{
+.bouton, .radio{
   cursor: pointer;
   min-width: 120px;
   margin: 0.5rem;
   padding: 0.4rem 0;
   text-align: center;
   position: relative;
-  border: 1px solid rgb(255, 99, 71);
-  border-radius: 4px;
+  line-height: 20px;
+  border: 1px solid rgb(178, 34, 34);
+  border-radius: 10px;
   -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
@@ -124,12 +137,28 @@ fieldset{ /*confondre le fieldset avec le formulaire (enlève l'espace par défa
   min-width: 20px;
 }
 
-.bouton2:hover{
+.bouton2 {
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgb(72, 61, 139);
+  color: rgb(72, 61, 139);
+  line-height: 38px;
+  border-radius: 25px;
+  padding: 0 22px;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  background: #fff;
+  width: 170px;
+}
+
+.bouton2:hover {
+  box-shadow: 0 2px 4px rgba(83, 100, 255, 0.45);
+  background: rgba(150, 80, 109,0.5);
+  color: #fff;
   border: none;
-  background-image: linear-gradient(147deg,#08C8F6 0%,#4D5DFB 74%);
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
-  cursor: pointer;
 }
 
 .button:hover {
@@ -156,9 +185,9 @@ fieldset{ /*confondre le fieldset avec le formulaire (enlève l'espace par défa
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .info{
   font-size: 20px;
-  color: rgb(72, 61, 139);
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -166,3 +195,13 @@ fieldset{ /*confondre le fieldset avec le formulaire (enlève l'espace par défa
 i{
   color: rgb(72, 61, 139);
 }
+
+p,
+.label2,
+option{
+  color: rgb(150, 80, 109);
+}
+
+option:disabled{
+  color: grey;
+} 

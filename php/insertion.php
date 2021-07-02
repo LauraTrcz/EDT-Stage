@@ -75,6 +75,8 @@
 
 		<!-- Formulaire d'insertion -->
 
+		<div class="formulaires">
+
 		<form method="POST" id="insertion" action=""> 
 
 			<div class="formulaire">
@@ -110,21 +112,29 @@
 
 				<!-- Nom de l'auteur -->
 
-				<div class="boite boite-row">
-					<label class="label" for="auteur">Auteur |</label><br>
-					<select class="bouton" name="auteur" id="auteur" type="submit" required>
+				<div class="boite boite2">
+					<div>
+						<label class="label" for="auteur">Auteur |</label><br>
+					</div>
+					<div>
+						<select class="bouton" name="auteur" id="auteur" type="submit" required>
 						<option disabled selected value> -- Sélectionner -- </option>
 						<option value="M. LESAINT">M. LESAINT</option>
 						<option value="M. JAMIN">M. JAMIN</option>
 						<option value="M. RICHER">M. RICHER</option>
-					</select>
+						</select>
+					</div>
+					
 				</div>
 
 				<!-- Nom de la composante -->
 
-				<div class="boite boite-row"> 
-		            <label for="composantes" class="label">Composantes |</label> 
-		            <select id="composantes" name="composantes" class="bouton" content-type="choices" trigger="true" target="filiere" required> 
+				<div class="boite boite2">
+					<div>
+						<label for="composantes" class="label">Composantes |</label> 
+					</div>
+					<div>
+						<select id="composantes" name="composantes" class="bouton" content-type="choices" trigger="true" target="filiere" required> 
 		                <option disabled selected value> -- Sélectionner -- </option>
 		                <option value="UFR-Droit-Eco-Gestion" disabled>UFR-Droit-Eco-Gestion</option>
 						<option value="UFR-Lettres-Langues-Sciences Humaines" disabled>UFR-Lettres-Langues-Sciences Humaines</option>
@@ -133,14 +143,18 @@
 						<option value="IUT">IUT</option>
 						<option value="Polytech" disabled>Polytech</option>
 						<option value="IAE" disabled>IAE</option> 
-		            </select> 
+		            	</select> 
+					</div>
 	        	</div>
 
 	        	<!-- Nom de la filière -->
 
-				<div class="boite boite-row">
-					<label class="label" for="filiere">Filière |</label><br>
-			    	<select class="bouton" name="filiere" id="filiere" type="submit" content-type="choices" trigger="true" target="formation" required>
+				<div class="boite boite2">
+					<div>
+						<label class="label" for="filiere">Filière |</label><br>
+					</div>
+					<div>
+						<select class="bouton" name="filiere" id="filiere" type="submit" content-type="choices" trigger="true" target="formation" required>
 			    		<optgroup reference="UFR-Droit-Eco-Gestion" label="UFR-Droit-Eco-Gestion">
 			    			<option disabled selected value> -- Sélectionner -- </option>
 			    			<option value="Portail L1/L2 - DEG">Portail L1/L2</option>
@@ -189,14 +203,18 @@
 			    			<option value="Licence IAE">Licence</option>
 							<option value="Master IAE">Master</option>
 			    		</optgroup>
-					</select>
+						</select>
+					</div>
 				</div>
 
 				<!-- Nom de la filière (on se contente de l'UFR Sciences) -->
 
-				<div class="boite boite-row"> 
-		            <label class="label" for="formation">Formation |</label>
-		            <select id="formation" name="formation" id="formation" class="bouton" required> 
+				<div class="boite boite2"> 
+					<div>
+						<label class="label" for="formation">Formation |</label>
+					</div>
+		            <div>
+		            	<select id="formation" name="formation" id="formation" class="bouton" required> 
 		            	<optgroup reference="Portail L1/L2 - Sciences" label="Portail L1/L2">
 		                	<option disabled selected value> -- Sélectionner -- </option> 
 		                    <option value="Licence 1 Sciences, technologies, santé / Portail MPCIE" >Licence 1 Sciences, technologies, santé / Portail MPCIE</option> 
@@ -322,7 +340,9 @@
 		                    <option value="CMI CE" >Chimie Environnement</option> 
 		                    <option value="CMI PSI" >Photonique signal imagerie</option> 
 		                </optgroup>
-		            </select>
+		           		</select>
+		            </div>
+		            
 		        </div>
 
 		        <script type="text/javascript">
@@ -374,9 +394,12 @@
 
 				<!-- Semestre -->
 
-				<div class="boite boite-row">
-					<label class="label" for="periode">Période |</label><br>
-			    	<select class="bouton" name="periode" id="periode" type="submit" required>
+				<div class="boite boite2">
+					<div>
+						<label class="label" for="periode">Période |</label><br>
+					</div>
+					<div>
+						<select class="bouton" name="periode" id="periode" type="submit" required>
 						<option disabled selected value> -- Sélectionner -- </option>
 						<optgroup label="Semestre">
 							<option value="Semestre 1">Semestre 1</option>
@@ -398,31 +421,16 @@
 							<option value="P11">Période 11</option>
 							<option value="P12">Période 12</option>
 						</optgroup>
-					</select>
+						</select>
+					</div>		
 				</div>
-				
-
-				<!-- Présentiel ou distanciel 
-				
-				<div class="boite">
-					<label class="label"for="presentiel">Présentiel</label>
-					<input type="radio" name="presentiel" class="radio" value="oui" onchange="afficher('div')">
-					<label class="label"for="non">Distanciel</label>
-					<input type="radio" name="presentiel" class="radio" value="non" onchange="effacer('div')" checked>
-
-					Jauge en présentiel 
-
-					<div class="boite" id="div" style="display:none">
-						<label class="label" for="jauge">Jauge</label><br>
-				    	<input class="bouton" type="text" id="jauge" name="jauge" placeholder="Ex: 50"><br><br>
-					</div>
-				</div> -->
 
 				<!-- Bouton validation -->
 
 				<input  class="bouton2" type="submit" name="formulaire_insertion" value="Valider">
 				</fieldset>
-			</form>
+			</div>
+		</form>
 		</div>
 	</section>
 </body>
