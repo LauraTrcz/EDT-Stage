@@ -177,23 +177,27 @@
 				<div class="boite">
 					<label class="label">Solveur |</label><br>
 					<div class="boite2">
-						<label class="info"for="solver">Minizinc</label>
-						<input type="radio" name="solver" class="radio" value="minizinc" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
-						<div class="boite2" id="div6" style="display:none">
-							<div>
-								<label class="label" for="format">DZN</label><br>
-					    		<input type="radio" name="format" class="radio" value="dzn">
-							</div>
-						    <div>
-						    	<label class="label" for="format">JSON</label><br>
-								<input type="radio" name="format" class="radio" value="json">
+						<div>
+							<label class="info"for="solver">Minizinc</label><br>
+							<input type="radio" name="solver" class="radio" value="minizinc" onchange="showMZN('div6'); effacerCHR()" content-type="choices" trigger="true" target="format">
+							<div class="boite2" id="div6" style="display:none">
+								<div>
+									<label class="label" for="format">DZN</label><br><br>
+						    		<input type="radio" name="format" class="radio" value="dzn">
+								</div>
+							    <div>
+							    	<label class="label" for="format">JSON</label><br><br>
+									<input type="radio" name="format" class="radio" value="json">
+								</div>
 							</div>
 						</div>
-						<label class="info"for="solver">Constraint Handling Rules</label>
-						<input type="radio" name="solver" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
-						<div class="boite2 display-none" id="div7" style="display:none">
-							<label class="label" for="format">JSON</label><br>
-							<input type="radio" name="format" class="radio" value="json">
+						<div>
+							<label class="info"for="solver">Constraint Handling Rules</label><br>
+							<input type="radio" name="solver" class="radio" value="CHR" onchange="showCHR('div7'); effacerMZN()" content-type="choices" trigger="true" target="format">
+							<div class="boite2 display-none" id="div7" style="display:none">
+								<label class="label" for="format">JSON</label><br>
+								<input type="radio" name="format" class="radio" value="json">
+							</div>
 						</div>
 					</div>
 						

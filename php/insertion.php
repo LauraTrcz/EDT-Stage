@@ -286,16 +286,16 @@
 		                <optgroup reference="Master - Sciences" label="Masters">
 		                	<option disabled style="font-weight: bold; color: white; background-color: black;" label="Masters 1">
 		                	<option disabled selected value> -- Sélectionner -- </option> 
-		                	<option value="ACDI" >Informatique / Analyse, Conception et Développement Informatique (ACDI)</option>
-		                    <option value="BSV" >Biologie végétale / Biologie systémique du végétal (BSV) - CMI</option>
+		                	<option value="Informatique / Analyse, Conception et Développement Informatique" >Informatique / Analyse, Conception et Développement Informatique</option>
+		                    <option value="Biologie végétale / Biologie systémique du végétal BSV - CMI" >Biologie végétale / Biologie systémique du végétal BSV - CMI</option>
 		                    <option value="Biologie Santé / Interactions Cellulaires Applications Thérapeutiques" >Biologie Santé / Interactions Cellulaires Applications Thérapeutiques</option>
 		                    <option value="Chimie / Chimie-environnement" >Chimie / Chimie-environnement</option>
 		                    <option value="Mathématiques et Applications / Data science et Données Biologiques et Numériques" >Mathématiques et Applications / Data science et Données Biologiques et Numériques</option>
-		                    <option value="EEZH" >Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides (EEZH)</option>
+		                    <option value="Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides" >Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides</option>
 		                    <option value="Biologie Végétale / Filières de l'horticulture et innovations" >Biologie Végétale / Filières de l'horticulture et innovations</option>
 		                    <option value="Biologie végétale / Gestion de la Santé des plantes" >Biologie végétale / Gestion de la Santé des plantes</option>
-		                    <option value="ID" >Informatique / Intelligence décisionnelle</option>
-		                    <option value="LUMOMAT" >Chimie /  Lumière Molécule Matière</option> 
+		                    <option value="Informatique / Intelligence décisionnelle" >Informatique / Intelligence décisionnelle</option>
+		                    <option value="Chimie /  Lumière Molécule Matière" >Chimie /  Lumière Molécule Matière</option> 
 		                    <option value="Mathématiques et Applications / Mathématiques fondamentales appliquées / Algèbre et géométrie" >Mathématiques et Applications / Mathématiques fondamentales appliquées / Algèbre et géométrie</option>
 		                    <option value="Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités" >Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités</option> 
 		                    <option value="Métiers de l'Enseignement, de l'Education et de la Formation 2nd degré / Mathématiques" >Métiers de l'Enseignement, de l'Education et de la Formation 2nd degré / Mathématiques</option>
@@ -303,23 +303,23 @@
 		                    <option value="Bio-géoscience / Paléontologie, paléo-environnement & patrimoine" >Bio-géoscience / Paléontologie, paléo-environnement & patrimoine</option>
 		                    <option value="Mathématiques et Applications / Préparation supérieure à l'Enseignement" >Mathématiques et Applications / Préparation supérieure à l'Enseignement</option>
 		                    <option value="Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>
-		                    <option value="PSI - CMI" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>       
+		                    <option value="Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>       
 		                    <option value="Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>
-		                    <option value="QPS" >Biologie Végétale / Qualité des production spécialisées (QPS)</option> 
+		                    <option value="Biologie Végétale / Qualité des production spécialisées" >Biologie Végétale / Qualité des production spécialisées</option> 
 		                    <option value="Chimie / Sciences et ingénierie de l'environnement" >Chimie / Sciences et ingénierie de l'environnement</option> 
 		                    <option value="Biologie Végétale / Semences et plants" >Biologie Végétale / Semences et plants</option>
 		                    <option value="Toxicologie et écotoxicologie / Toxicologie environnementale et humaine" >Toxicologie et écotoxicologie / Toxicologie environnementale et humaine</option> 
 		                	<option disabled style="font-weight: bold; color: white; background-color: black;" label="Masters 2"> 
-		                	<option value="ACDI" >Informatique / Analyse, Conception et Développement Informatique (ACDI)</option>
-		                    <option value="BSV" >Biologie végétale / Biologie systémique du végétal (BSV) - CMI</option>
+		                	<option value="Informatique / Analyse, Conception et Développement Informatique" >Informatique / Analyse, Conception et Développement Informatique</option>
+		                    <option value="Biologie végétale / Biologie systémique du végétal BSV - CMI" >Biologie végétale / Biologie systémique du végétal BSV - CMI</option>
 		                    <option value="Biologie Santé / Interactions Cellulaires Applications Thérapeutiques" >Biologie Santé / Interactions Cellulaires Applications Thérapeutiques</option>
 		                    <option value="Chimie / Chimie-environnement" >Chimie / Chimie-environnement</option>
 		                    <option value="Mathématiques et Applications / Data science et Données Biologiques et Numériques" >Mathématiques et Applications / Data science et Données Biologiques et Numériques</option>
-		                    <option value="EEZH" >Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides (EEZH)</option>
+		                    <option value="Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides" >Biodiversité, écologie et évolution / Ecologie et éco-ingénierie des zones humides</option>
 		                    <option value="Biologie Végétale / Filières de l'horticulture et innovations" >Biologie Végétale / Filières de l'horticulture et innovations</option>
 		                    <option value="Biologie végétale / Gestion de la Santé des plantes" >Biologie végétale / Gestion de la Santé des plantes</option>
-		                    <option value="ID" >Informatique / Intelligence décisionnelle</option>
-		                    <option value="LUMOMAT" >Chimie /  Lumière Molécule Matière</option> 
+		                    <option value="Informatique / Intelligence décisionnelle" >Informatique / Intelligence décisionnelle</option>
+		                    <option value="Chimie /  Lumière Molécule Matière" >Chimie /  Lumière Molécule Matière</option> 
 		                    <option value="Mathématiques et Applications / Mathématiques fondamentales appliquées / Algèbre et géométrie" >Mathématiques et Applications / Mathématiques fondamentales appliquées / Algèbre et géométrie</option>
 		                    <option value="Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités" >Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités</option> 
 		                    <option value="Métiers de l'Enseignement, de l'Education et de la Formation 2nd degré / Mathématiques" >Métiers de l'Enseignement, de l'Education et de la Formation 2nd degré / Mathématiques</option>
@@ -327,18 +327,18 @@
 		                    <option value="Bio-géoscience / Paléontologie, paléo-environnement & patrimoine" >Bio-géoscience / Paléontologie, paléo-environnement & patrimoine</option>
 		                    <option value="Mathématiques et Applications / Préparation supérieure à l'Enseignement" >Mathématiques et Applications / Préparation supérieure à l'Enseignement</option>
 		                    <option value="Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>
-		                    <option value="PSI - CMI" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>       
+		                    <option value=">Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>       
 		                    <option value="Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie" >Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie</option>
-		                    <option value="QPS" >Biologie Végétale / Qualité des production spécialisées (QPS)</option> 
+		                    <option value="Biologie Végétale / Qualité des production spécialisées" >Biologie Végétale / Qualité des production spécialisées</option> 
 		                    <option value="Chimie / Sciences et ingénierie de l'environnement" >Chimie / Sciences et ingénierie de l'environnement</option> 
 		                    <option value="Biologie Végétale / Semences et plants" >Biologie Végétale / Semences et plants</option>
 		                    <option value="Toxicologie et écotoxicologie / Toxicologie environnementale et humaine" >Toxicologie et écotoxicologie / Toxicologie environnementale et humaine</option>              
 		                </optgroup> 
 		                <optgroup reference="Master Ingénierie - Sciences" label="Master ingénierie">
 		                	<option disabled selected value> -- Sélectionner -- </option> 
-		                    <option value="CMI BSV" >Biologie Systémique du Végétal</option> 
-		                    <option value="CMI CE" >Chimie Environnement</option> 
-		                    <option value="CMI PSI" >Photonique signal imagerie</option> 
+		                    <option value="Biologie Systémique du Végétal" >Biologie Systémique du Végétal</option> 
+		                    <option value="Chimie Environnement" >Chimie Environnement</option> 
+		                    <option value="Photonique signal imagerie" >Photonique signal imagerie</option> 
 		                </optgroup>
 		           		</select>
 		            </div>
@@ -407,19 +407,19 @@
 						</optgroup>
 						<optgroup label="Période">
 							<option disabled style="font-weight: bold; color: white; background-color: black;" label="Périodes du semestre 1">
-							<option value="P1">Période 1</option>
-							<option value="P2">Période 2</option>
-							<option value="P3">Période 3</option>
-							<option value="P4">Période 4</option>
-							<option value="P5">Période 5</option>
-							<option value="P6">Période 6</option>
+							<option value="Période 1">Période 1</option>
+							<option value="Période 2">Période 2</option>
+							<option value="Période 3">Période 3</option>
+							<option value="Période 4">Période 4</option>
+							<option value="Période 5">Période 5</option>
+							<option value="Période 6">Période 6</option>
 							<option disabled style="font-weight: bold; color: white; background-color: black;" label="Périodes du semestre 2">
-							<option value="P7">Période 7</option>
-							<option value="P8">Période 8</option>
-							<option value="P9">Période 9</option>
-							<option value="P10">Période 10</option>
-							<option value="P11">Période 11</option>
-							<option value="P12">Période 12</option>
+							<option value="Période 7">Période 7</option>
+							<option value="Période 8">Période 8</option>
+							<option value="Période 9">Période 9</option>
+							<option value="Période 10">Période 10</option>
+							<option value="Période 11">Période 11</option>
+							<option value="Période 12">Période 12</option>
 						</optgroup>
 						</select>
 					</div>		

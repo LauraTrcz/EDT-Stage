@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 22 juin 2021 à 15:29
+-- Généré le : ven. 02 juil. 2021 à 15:30
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -44,17 +44,21 @@ CREATE TABLE `probleme` (
 --
 
 INSERT INTO `probleme` (`id`, `fichier`, `date_t`, `auteur`, `composantes`, `filiere`, `formation`, `annee`, `periode`) VALUES
-(17, 'dgfdf', '2021-05-26 11:14:35', 'M. RICHER', 'UFR-Sciences', 'Master Ingénierie - Sciences', 'CMI BSV', 2018, 'Semestre 2'),
-(18, 'dgvdg', '2021-05-26 11:14:55', 'M. LESAINT', 'UFR-Sciences', 'Licence - Sciences', 'Licence 3 Biologie cellulaire moléculaire et physiologie', 2020, 'Semestre 1'),
-(19, 'yhyg', '2021-05-28 07:50:43', 'M. LESAINT', 'UFR-Sciences', 'Licence Pro - Sciences', 'Maîtrise énergie, électricité, développement durable / Génie thermique', 2016, 'Semestre 1'),
-(21, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-05-28 15:28:32', 'M. LESAINT', 'UFR-Sciences', 'Licence Pro - Sciences', 'Métiers du commerce international / Marketing et commerce international des vins de terroir ESA', 2019, 'Semestre 1'),
-(23, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-05-31 09:46:33', 'M. RICHER', 'UFR-Sciences', 'Licence - Sciences', 'Licence 2 Sciences de la vie et de la terre - CMI -BSV', 2020, 'Semestre 2'),
-(24, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-05-31 19:42:28', 'M. RICHER', 'UFR-Sciences', 'Master Ingénierie - Sciences', 'CMI PSI', 2021, 'Semestre 2'),
-(44, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-21 12:14:00', 'M. RICHER', 'UFR-Sciences', 'Portail L1/L2 - Sciences', 'Licence 1 Sciences, technologies, santé / Portail MPCIE - CMI CE', 2018, 'P2'),
-(47, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-21 12:16:08', 'M. RICHER', 'UFR-Sciences', 'Licence Pro - Sciences', 'Commercialisation de produits alimentaires/ Valorisation innovation transformation de produits alimentaires ESA', 2018, 'P2'),
-(48, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-06-21 12:16:45', 'M. JAMIN', 'UFR-Sciences', 'Licence - Sciences', 'Licence 3 Informatique', 2020, 'P6'),
-(49, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-06-21 12:17:05', 'M. JAMIN', 'UFR-Sciences', 'Master - Sciences', 'Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités', 2020, 'Semestre 2'),
-(50, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-22 09:42:41', 'M. JAMIN', 'UFR-Sciences', 'Licence Pro - Sciences', 'Métiers du commerce international / Marketing et commerce international des vins de terroir ESA', 2018, 'P10');
+(1, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-05-28 15:28:32', 'M. LESAINT', 'UFR-Sciences', 'Licence Pro - Sciences', 'Métiers du commerce international / Marketing et commerce international des vins de terroir ESA', 2019, 'Semestre 1'),
+(2, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-05-31 09:46:33', 'M. RICHER', 'UFR-Sciences', 'Licence - Sciences', 'Licence 2 Sciences de la vie et de la terre - CMI -BSV', 2020, 'Semestre 2'),
+(3, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-21 12:14:00', 'M. RICHER', 'UFR-Sciences', 'Portail L1/L2 - Sciences', 'Licence 1 Sciences, technologies, santé / Portail MPCIE - CMI CE', 2018, 'Période 2'),
+(4, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-21 12:16:08', 'M. RICHER', 'UFR-Sciences', 'Licence Pro - Sciences', 'Commercialisation de produits alimentaires/ Valorisation innovation transformation de produits alimentaires ESA', 2018, 'Période 2'),
+(5, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-06-21 12:16:45', 'M. JAMIN', 'UFR-Sciences', 'Licence - Sciences', 'Licence 3 Informatique', 2020, 'Période 6'),
+(6, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-06-21 12:17:05', 'M. JAMIN', 'UFR-Sciences', 'Master - Sciences', 'Mathématiques et Applications / Mathématiques fondamentales et appliquées / Analyse et probabilités', 2020, 'Semestre 2'),
+(7, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-06-22 09:42:41', 'M. JAMIN', 'UFR-Sciences', 'Licence Pro - Sciences', 'Métiers du commerce international / Marketing et commerce international des vins de terroir ESA', 2018, 'Période 10'),
+(8, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', '2021-07-01 21:46:49', 'M. RICHER', 'UFR-Sciences', 'Portail L1/L2 - Sciences', 'Licence 1 Sciences, technologies, santé / Portail MPCIE - CMI PSI', 2020, 'Période 1'),
+(9, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', '2021-07-01 23:37:20', 'M. JAMIN', 'UFR-Sciences', 'Master - Sciences', 'Physique Appliquée et Ingénierie Physique /  Photonique signal imagerie', 2015, 'Période 12'),
+(10, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-07-01 23:38:15', 'M. RICHER', 'UFR-Sciences', 'Licence - Sciences', 'Licence 3 Chimie - médicaments', 2015, 'Semestre 2'),
+(11, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-07-02 00:05:00', 'M. JAMIN', 'UFR-Sciences', 'Master - Sciences', 'Biologie Santé / Neurobiologie Cellulaire et Moléculaire', 2015, 'Période 11'),
+(12, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', '2021-07-02 06:59:33', 'M. RICHER', 'UFR-Sciences', 'Licence - Sciences', 'Licence 1 Double Licence Math-Économie', 2017, 'Période 3'),
+(13, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '2021-07-02 11:58:17', 'M. LESAINT', 'UFR-Sciences', 'Licence - Sciences', 'Licence 3 Physique applications', 2016, 'Période 7'),
+(14, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-07-02 12:17:22', 'M. JAMIN', 'UFR-Sciences', 'Portail L1/L2 - Sciences', 'Licence 1 Sciences, technologies, santé / Portail MPCIE - Mise à niveau', 2019, 'Période 5'),
+(15, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '2021-07-02 13:03:33', 'M. RICHER', 'UFR-Sciences', 'Master - Sciences', 'Bio-géoscience / Paléontologie, paléo-environnement & patrimoine', 2021, 'Semestre 1');
 
 -- --------------------------------------------------------
 
@@ -71,26 +75,29 @@ CREATE TABLE `solutions` (
   `format` varchar(100) NOT NULL,
   `representation` varchar(100) NOT NULL,
   `temps_calcul` varchar(10) NOT NULL,
-  `stat_2` int(255) NOT NULL,
-  `stat_3` int(255) NOT NULL,
-  `stat_4` int(255) NOT NULL
+  `initTime` float NOT NULL,
+  `solveTime` float NOT NULL,
+  `variables` int(255) NOT NULL,
+  `propagators` int(255) NOT NULL,
+  `propagations` int(255) NOT NULL,
+  `nodes` int(255) NOT NULL,
+  `failures` int(255) NOT NULL,
+  `restarts` int(255) NOT NULL,
+  `peakDepth` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `solutions`
 --
 
-INSERT INTO `solutions` (`id`, `fichier_probleme`, `fichier_solution`, `timestamp_t`, `solver`, `format`, `representation`, `temps_calcul`, `stat_2`, `stat_3`, `stat_4`) VALUES
-(1, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 11:23:38', 'minizinc', 'dzn', 'intent', '02:20:02', 0, 0, 0),
-(3, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '', '2021-06-22 11:37:05', 'minizinc', 'dzn', 'intent', '19:00:00', 0, 0, 0),
-(4, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 11:48:49', 'CHR', 'json', 'extent', '00:10:00', 0, 0, 0),
-(5, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s44_dw.xml', '', '2021-06-22 12:01:36', 'minizinc', 'dzn', 'intent', '02:00:00', 0, 0, 0),
-(6, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 12:03:28', 'minizinc', 'dzn', 'intent', '02:00:00', 0, 0, 0),
-(7, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 12:20:30', 'minizinc', 'dzn', 'intent', '02:00:00', 0, 0, 0),
-(8, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 12:21:21', 'minizinc', 'json', 'extent', '02:00:00', 0, 0, 0),
-(9, 'instance_xml/ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 12:23:13', 'minizinc', 'dzn', 'intent', '02:00:00', 0, 0, 0),
-(10, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 13:20:43', 'minizinc', 'dzn', 'intent', '02:20:00', 0, 0, 0),
-(11, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s1.xml', '', '2021-06-22 13:29:43', 'minizinc', 'dzn', 'intent', '02:20:00', 0, 0, 0);
+INSERT INTO `solutions` (`id`, `fichier_probleme`, `fichier_solution`, `timestamp_t`, `solver`, `format`, `representation`, `temps_calcul`, `initTime`, `solveTime`, `variables`, `propagators`, `propagations`, `nodes`, `failures`, `restarts`, `peakDepth`) VALUES
+(1, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_02_13_43.xml', '2021-07-02 00:13:48', 'minizinc', 'dzn', 'intent', '02:11:06', 0.386, 0.017, 14011, 13537, 69148, 38, 0, 0, 37),
+(2, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_02_24_13.xml', '2021-07-02 00:24:17', 'minizinc', 'dzn', 'intent', '10:10:10', 0.391, 0.015, 14011, 13537, 69148, 38, 0, 0, 37),
+(3, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_09_00_06.xml', '2021-07-02 07:00:14', 'minizinc', 'dzn', 'intent', '10:00:00', 0.691, 0.018, 14011, 13537, 69148, 38, 0, 0, 37),
+(4, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_12_09_56.xml', '2021-07-02 10:10:00', 'minizinc', 'dzn', 'intent', '10:20:30', 0.383, 0.017, 14011, 13537, 69148, 38, 0, 0, 37),
+(5, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_02_20_37.xml', '2021-07-02 12:20:42', 'minizinc', 'dzn', 'intent', '10:10:10', 0.376, 0.015, 14011, 13537, 69148, 38, 0, 0, 37),
+(6, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_02_28_58.xml', '2021-07-02 12:29:02', 'minizinc', 'dzn', 'intent', '20:20:04', 0.411, 0.018, 14011, 13537, 69148, 38, 0, 0, 37),
+(7, 'ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw.xml', 'solution_ua_l3info_20s6_w12d5s8_e0r5t2g4_s45_dw__2072021_03_05_01.xml', '2021-07-02 13:05:05', 'minizinc', 'dzn', 'intent', '00:00:10', 0.38, 0.022, 14011, 13537, 69148, 38, 0, 0, 37);
 
 --
 -- Index pour les tables déchargées
@@ -116,13 +123,13 @@ ALTER TABLE `solutions`
 -- AUTO_INCREMENT pour la table `probleme`
 --
 ALTER TABLE `probleme`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `solutions`
 --
 ALTER TABLE `solutions`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

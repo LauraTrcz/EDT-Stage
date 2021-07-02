@@ -56,8 +56,6 @@ header img{
 
 .page,
 .resultats {
-	background-size: cover;
-	background-repeat: no-repeat;
 	text-align: center;
 	padding: 50px;
 }
@@ -70,23 +68,16 @@ header img{
   height: 200px;
 }
 
-
 .formulaires{
   margin: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  height: auto;
 }
 
 .formulaires div{
   margin: 20px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  height: auto;
 }
 
 fieldset{
@@ -96,17 +87,11 @@ fieldset{
 
 #parametrage{
   margin: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  height: auto;
   box-shadow: 10px 5px 5px rgb(105, 105, 105);
 }
 
 .boite{
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -206,7 +191,7 @@ h3{
 }
 
 option{
-  color: rgb(150, 80, 109);
+  color: rgb(72, 61, 139);
 }
 
 option:disabled{

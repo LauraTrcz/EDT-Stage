@@ -155,62 +155,62 @@
 			     break;
 			}
 			case 'P1': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P1" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 1" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P2': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P2" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 2" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P3': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P3" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 3" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P4': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P4" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 4" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P5': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P5" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 5" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P6': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P6" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 6" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P7': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P7" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 7" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P8': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P8" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 8" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P9': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P9" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 9" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P10': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P10" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 10" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P11': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P11" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 11" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
 			case 'P12': {
-				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "P12" ORDER BY annee DESC');
+				$reponse = $db->query('SELECT * FROM probleme WHERE periode = "Période 12" ORDER BY annee DESC');
 			    $data_instances = $reponse->fetchAll();
 			     break;
 			}
@@ -320,11 +320,11 @@
 
 	}else if(isset($_GET['filtre_format'])) {
 		$filtre_format = htmlspecialchars($_GET['filtre_format']);
-
+		/*
 		$tab = [$DZN => "dzn", $JSON => "json"];
 		$reponse = $db->query('SELECT * FROM solutions WHERE solver = "'.$filtre_format.'" ORDER BY timestamp_t DESC');
-		$data_solutions = $reponse->fetchAll();
-		/*
+		$data_solutions = $reponse->fetchAll();*/
+		
 		switch($filtre_format){
 
 			case 'DZN': {
@@ -337,7 +337,7 @@
 			    $data_solutions = $reponse->fetchAll();
 			     break;
 			}
-	    }*/
+	    }
 
 	// Représentation
 
@@ -403,12 +403,17 @@
 			case 'DC2': {
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY timestamp_t ASC');
 			    $data_solutions = $reponse->fetchAll();
-			     break;
+			    break;
 			}
-			case 'STC': {	//A REMPLACER
+			case 'STC': {
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(solveTime as FLOAT) ASC');
 			    $data_solutions = $reponse->fetchAll();
-			     break;
+			    break;
+			}
+			case 'PRC': {
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(propagations as FLOAT) ASC');
+			    $data_solutions = $reponse->fetchAll();
+			    break;
 			}
 
 
@@ -416,12 +421,17 @@
 			case 'DD2': {
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY timestamp_t DESC');
 			    $data_solutions = $reponse->fetchAll();
-			     break;
+			    break;
 			}
-			case 'STD': {	//A REMPLACER
+			case 'STD': {
 				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(solveTime as FLOAT) DESC');
 			    $data_solutions = $reponse->fetchAll();
-			     break;
+			    break;
+			}
+			case 'PRD': {
+				$reponse = $db->query('SELECT * FROM solutions ORDER BY CAST(propagations as FLOAT) DESC');
+			    $data_solutions = $reponse->fetchAll();
+			    break;
 			}
 	    } 
 	} else {
@@ -674,14 +684,14 @@
 									<option value="AUC">Auteur</option>
 									<option value="DC">Date de publication</option>
 									<option value="OC">Ordre alphabétique</option>
-									<option value="PC">Période</option>
+									<option value="PC" disabled>Période</option>
 								</optgroup>
 								<optgroup label="Ordre décroissant">
 									<option value="AD">Année</option>
 									<option value="AUD">Auteur</option>
 									<option value="DD">Date de publication</option>
 									<option value="OD">Ordre alphabétique</option>
-									<option value="PD">Période</option>
+									<option value="PD" disabled>Période</option>
 								</optgroup>
 							</select>
 		               	 	<input class="bouton2" type="submit" name="tri" id="tri" value="Trier">
@@ -717,7 +727,7 @@
 					    	$serialize_probleme_arr = serialize($probleme_arr); //sérialize (prépare à la sauvegarde en retournant une chaîne contenant une représentation linéaire pour être stockée)
 						?>
 
-						<input class="bouton2" type='submit' value='export' name='export'>
+						<input class="bouton2" type='submit' value='Export' name='export'>
 					    <textarea name='export_data' style='display: none;'><?php echo $serialize_probleme_arr; ?></textarea>
 					
 					</form>
@@ -854,10 +864,10 @@
 							</div>
 						</div>
 
-						<!-- Filtrer par temps de calcul final -->
+						<!-- Filtrer par solveTime -->
 
 						<div class="boite">
-							<input type="button" value="Temps de calcul final" class="bouton" onclick="showTCF('div11');"/>
+							<input type="button" value="solveTime" class="bouton" onclick="showTCF('div11');"/>
 							<div style="display:none" id="div11">
 								<div class="choix">
 									<label for="filtre_solveTime">0 => 59s</label>
@@ -902,10 +912,12 @@
 								<optgroup label="Ordre croissant">
 									<option value="DC2">Timestamp</option>
 									<option value="STC">Solve Time</option>
+									<option value="PRC">Propagations</option>
 								</optgroup>
 								<optgroup label="Ordre décroissant">
 									<option value="DD2">Timestamp</option>
 									<option value="STD">Solve Time</option>
+									<option value="PRD">Propagations</option>
 								</optgroup>
 							</select>
 		               	 	<input class="bouton2" type="submit" name="tri" id="tri" value="Trier">
@@ -948,7 +960,7 @@
 					    	$serialize_probleme_arr = serialize($probleme_arr);
 						?>
 
-						<input class="bouton2" type='submit' value='export' name='export'>
+						<input class="bouton2" type='submit' value='Export' name='export'>
 					    <textarea name='export_data2' style='display: none;'><?php echo $serialize_probleme_arr; ?></textarea>
 					
 					</form>
@@ -1026,7 +1038,5 @@
 			</div>
 		</div>
 	</section>
-
-
 </body>
 </html>
